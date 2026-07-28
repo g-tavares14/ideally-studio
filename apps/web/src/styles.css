@@ -1,0 +1,85 @@
+html,
+body {
+  margin: 0;
+  padding: 0;
+  background: #efede6;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+a {
+  color: #a8563a;
+  text-decoration: none;
+}
+
+a:hover {
+  color: #14140f;
+}
+
+canvas {
+  display: block;
+}
+
+@keyframes cfRise {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes cfFade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.cf-pretty {
+  text-wrap: pretty;
+}
+
+/*
+ * Estados de hover.
+ *
+ * No design original estes vinham de `style-hover`, que o runtime compilava
+ * para uma regra `.classe:hover { … !important }`. O `!important` é o que faz
+ * a regra ganhar do atributo `style` inline do próprio elemento — por isso os
+ * hovers precisam viver aqui, e não num objeto de estilo do React.
+ */
+
+.cf-h-ink:hover {
+  color: #14140f !important;
+}
+
+.cf-h-cream:hover {
+  color: #efede6 !important;
+}
+
+.cf-h-underline:hover {
+  border-bottom-color: #14140f !important;
+}
+
+.cf-h-invert:hover {
+  background: #14140f !important;
+  color: #efede6 !important;
+}
+
+.cf-h-border-ink:hover {
+  border-color: #14140f !important;
+}
+
+.cf-h-tile:hover {
+  background: #e0dbcf !important;
+}
+
+.cf-h-cta:hover {
+  background: #a8563a !important;
+}

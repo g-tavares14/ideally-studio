@@ -1,0 +1,17 @@
+node_modules
+dist
+.next
+*.local
+.DS_Store
+
+# Prisma
+packages/db/generated
+.env
+
+# Terraform
+.terraform/
+*.tfstate
+*.tfstate.*
+*.tfvars
+!*.tfvars.example
+.terraform.lock.hcl

@@ -1,0 +1,92 @@
+// Modelo do catálogo do Cria Forma.
+//
+// Nesta fase o schema existe, migra e recebe seed, mas **o app não o consulta**:
+// o site segue lendo o catálogo semente de `@cria-forma/shared`. Modelar é
+// reversível enquanto ninguém depende do modelo.
+
+generator client {
+  // Prisma 7: `prisma-client`, não mais `prisma-client-js`.
+  // `importFileExtension = ""` é o que faz os imports gerados conviverem com o
+  // bundler do Next.
+  provider            = "prisma-client"
+  output              = "../generated"
+  importFileExtension = ""
+}
+
+datasource db {
+  // A URL não vive mais aqui: no Prisma 7 ela é configurada no
+  // `prisma.config.ts` (para a CLI) e pelo driver adapter (em runtime).
+  provider = "postgresql"
+}
+
+/// As categorias do catálogo.
+///
+/// Hoje `cat` é string livre que precisa bater com o array FILTROS — duas
+/// constantes acopladas por convenção. O banco é o lugar de tornar isso
+/// explícito.
+enum Categoria {
+  DECORACAO
+  MESA
+  UTILITARIO
+}
+
+model Produto {
+  /// o slug: 'vaso', 'anel', 'orbita'. Já é o que as URLs usam.
+  id        String    @id
+  nome      String
+  categoria Categoria
+  /// preço base em **centavos**. Nunca Float — dinheiro em ponto flutuante é
+  /// bug garantido. A UI hoje trabalha em reais inteiros, então a conversão
+  /// acontece na borda, quando o app for ligado no banco.
+  precoCent Int
+  altura    String
+  prazo     String
+  desc      String
+
+  /// posição no showroom e no catálogo
+  ordem Int @unique
+
+  criadoEm     DateTime @default(now())
+  atualizadoEm DateTime @updatedAt
+
+  @@map("produtos")
+}
+
+model Material {
+  /// 'pla', 'resina', 'metal'
+  id   String @id
+  nome String
+  /// acréscimo sobre o preço base, em centavos
+  deltaCent Int
+  /// coeficientes de renderização — Float é o tipo certo aqui, não é dinheiro
+  rough Float
+  metal Float
+  ordem Int @unique
+
+  @@map("materiais")
+}
+
+model Cor {
+  id    String @id
+  nome  String
+  /// hexadecimal com #, como o Three.js consome
+  hex   String
+  ordem Int    @unique
+
+  @@map("cores")
+}
+
+model Tamanho {
+  /// 'p', 'm', 'g'
+  id   String @id
+  nome String
+  /// rótulo exibido: '−30%', 'padrão', '+40%'
+  cm   String
+  /// multiplicador de preço
+  mult Float
+  /// escala aplicada à peça na cena
+  fator Float
+  ordem Int   @unique
+
+  @@map("tamanhos")
+}
