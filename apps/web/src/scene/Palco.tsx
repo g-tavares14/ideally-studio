@@ -32,10 +32,10 @@ export const TOPO_PEDESTAL = 0.72;
 /** Tudo que não é peça: fundo, chão, parede, luzes e pedestais. */
 export default function Palco({ ambiente, lugares }: { ambiente: Ambiente; lugares: Lugar[] }) {
   const penumbra = ambiente === 'Penumbra';
-  const bg = penumbra ? '#1A1A18' : '#EFEDE6';
-  const corChao = penumbra ? '#232320' : '#E7E3DA';
-  const corParede = penumbra ? '#1F1F1C' : '#EDEAE2';
-  const corPedestal = penumbra ? '#2C2C28' : '#E2DED3';
+  const bg = penumbra ? '#00143D' : '#FFF8F2';
+  const corChao = penumbra ? '#082555' : '#F0F4FA';
+  const corParede = penumbra ? '#061E4A' : '#F7F9FC';
+  const corPedestal = penumbra ? '#12336A' : '#DDE6F2';
 
   return (
     <>

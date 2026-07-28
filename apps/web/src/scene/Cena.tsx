@@ -10,6 +10,7 @@ import type { Lugar } from './Palco';
 import Peca from './Peca';
 import type { Produto } from '@cria-forma/shared';
 import type { Ambiente, Screen } from '../types';
+import { cor as paleta } from '../styles/tokens';
 
 /** Largura do ProdutoPanel — a peça é jogada para a esquerda para não ficar sob ele. */
 const PAINEL_PX = 440;
@@ -371,10 +372,10 @@ function Etiqueta({ nome, preco, sobre }: { nome: string; preco: string; sobre: 
         alignItems: 'center',
         gap: 9,
         padding: '6px 12px',
-        border: '1px solid ' + (sobre ? '#14140F' : 'rgba(20,20,15,0.18)'),
+        border: '1px solid ' + (sobre ? paleta.laranja : 'rgba(0,30,90,0.2)'),
         borderRadius: 100,
-        background: sobre ? '#14140F' : 'rgba(239,237,230,0.82)',
-        color: sobre ? '#EFEDE6' : '#14140F',
+        background: sobre ? paleta.laranja : 'rgba(255,248,242,0.86)',
+        color: paleta.azul,
         backdropFilter: 'blur(6px)',
         WebkitBackdropFilter: 'blur(6px)',
         whiteSpace: 'nowrap',

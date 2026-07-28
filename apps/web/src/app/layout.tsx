@@ -1,7 +1,8 @@
 import type { Metadata, Viewport } from 'next';
-import { Instrument_Sans, Instrument_Serif } from 'next/font/google';
+import { Instrument_Sans, Montserrat } from 'next/font/google';
 import { listarProdutos } from '../lib/catalogo';
 import Shell from './Shell';
+import AnimatedFavicon from '../ui/AnimatedFavicon';
 import '../styles.css';
 
 // As famílias entram como variáveis CSS, e não como classe: os estilos são
@@ -14,19 +15,23 @@ const sans = Instrument_Sans({
   display: 'swap',
 });
 
-const serif = Instrument_Serif({
+const display = Montserrat({
   subsets: ['latin'],
-  weight: '400',
-  style: ['normal', 'italic'],
-  variable: '--fonte-serif',
+  weight: ['400', '600', '700', '800'],
+  variable: '--fonte-display',
   display: 'swap',
 });
 
 export const metadata: Metadata = {
-  title: 'Cria Forma Studio — Coleção Sedimento',
+  title: 'Ideally Studio 3D — Coleção Sedimento',
   description:
-    'Ateliê de fabricação aditiva em São Paulo. Seis peças impressas sob demanda, ' +
-    'na cor e na escala que você escolher.',
+    'Ideally Studio 3D: transformando ideias em realidade com fabricação aditiva. ' +
+    'Conheça seis peças impressas sob demanda em São Paulo.',
+  openGraph: {
+    title: 'Ideally Studio 3D — Coleção Sedimento',
+    description: 'Objetos impressos camada por camada, produzidos sob demanda em São Paulo.',
+    type: 'website',
+  },
 };
 
 export const viewport: Viewport = {
@@ -40,8 +45,9 @@ export default async function RootLayout({ children }: { children: React.ReactNo
   const produtos = await listarProdutos();
 
   return (
-    <html lang="pt-BR" className={`${sans.variable} ${serif.variable}`}>
+    <html lang="pt-BR" className={`${sans.variable} ${display.variable}`}>
       <body>
+        <AnimatedFavicon />
         <Shell produtos={produtos}>{children}</Shell>
       </body>
     </html>

@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import type { CSSProperties } from 'react';
-import { cor as paleta, eyebrow, fonte } from '../styles/tokens';
+import { cor as paleta } from '../styles/tokens';
+import BrandLogo from './BrandLogo';
 
 const link: CSSProperties = {
   fontSize: 13,
@@ -33,26 +34,16 @@ export default function Nav({ qtdSacola, abrirSacola }: Props) {
       }}
     >
       <Link
+        aria-label="Ideally Studio 3D — início"
         href="/"
         style={{
           display: 'flex',
-          alignItems: 'baseline',
-          gap: 10,
+          alignItems: 'center',
           cursor: 'pointer',
-          color: 'inherit',
           textDecoration: 'none',
         }}
       >
-        <span
-          style={{
-            fontFamily: fonte.serif,
-            fontSize: 26,
-            letterSpacing: '-0.01em',
-          }}
-        >
-          Cria Forma
-        </span>
-        <span style={{ ...eyebrow('0.22em'), paddingBottom: 3 }}>Studio</span>
+        <BrandLogo style={{ width: 184 }} />
       </Link>
 
       <div style={{ display: 'flex', alignItems: 'center', gap: 30 }}>
@@ -77,6 +68,7 @@ export default function Nav({ qtdSacola, abrirSacola }: Props) {
             padding: '7px 14px',
             border: `1px solid ${paleta.tinta}`,
             borderRadius: 100,
+            fontWeight: 600,
           }}
         >
           <span>Sacola</span>

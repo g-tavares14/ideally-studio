@@ -4,3 +4,5 @@ dist
 packages/db/generated
 packages/db/prisma/migrations
 package-lock.json
+*.svg
+apps/web/next-env.d.ts

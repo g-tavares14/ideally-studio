@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import type { CSSProperties } from 'react';
 import { cor as paleta, eyebrow, fonte } from '../styles/tokens';
+import BrandLogo from './BrandLogo';
 
 const bloco: CSSProperties = {
   display: 'flex',
@@ -10,7 +11,7 @@ const bloco: CSSProperties = {
   paddingTop: 18,
 };
 
-const rotulo = eyebrow('0.22em');
+const rotulo: CSSProperties = { ...eyebrow('0.22em'), color: paleta.textoEscuro };
 
 const corpo: CSSProperties = {
   fontSize: 14.5,
@@ -40,7 +41,7 @@ export default function Sobre() {
           display: 'inline-block',
           fontSize: 12,
           letterSpacing: '0.06em',
-          color: paleta.suave,
+          color: paleta.textoEscuro,
           cursor: 'pointer',
           textDecoration: 'none',
         }}
@@ -60,22 +61,35 @@ export default function Sobre() {
         <div>
           <div
             style={{
+              width: 'fit-content',
+              maxWidth: '100%',
+              marginBottom: 42,
+              padding: '16px 18px',
+              borderRadius: 10,
+              background: paleta.creme,
+            }}
+          >
+            <BrandLogo variante="completa" />
+          </div>
+          <div
+            style={{
               fontFamily: fonte.serif,
-              fontSize: 54,
+              fontSize: 48,
+              fontWeight: 700,
               lineHeight: 1.04,
-              letterSpacing: '-0.02em',
+              letterSpacing: '-0.04em',
             }}
           >
             Uma peça só existe
             <br />
             quando alguém
             <br />
-            <span style={{ fontStyle: 'italic' }}>a encomenda.</span>
+            <span style={{ color: paleta.laranja }}>a encomenda.</span>
           </div>
           <div className="cf-pretty" style={{ ...corpo, marginTop: 30 }}>
-            O Cria Forma é um ateliê de fabricação aditiva. Não mantemos estoque: cada objeto é
-            impresso depois do pedido, na cor e na escala que você escolheu, e finalizado à mão —
-            lixado, selado e assinado na base.
+            A Ideally Studio 3D transforma ideias em objetos por meio da fabricação aditiva. Não
+            mantemos estoque: cada peça é impressa depois do pedido, na cor e na escala que você
+            escolheu, e finalizada à mão — lixada, selada e assinada na base.
           </div>
           <div className="cf-pretty" style={{ ...corpo, marginTop: 18 }}>
             Trabalhamos com PLA de origem vegetal, resina cerâmica e deposição metálica. As sobras

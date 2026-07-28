@@ -9,38 +9,44 @@ import type { CSSProperties } from 'react';
  */
 
 export const cor = {
-  /** preto esverdeado do texto e das superfícies escuras */
-  tinta: '#14140F',
-  /** creme do fundo do site */
-  creme: '#EFEDE6',
-  /** papel dos painéis sobrepostos, um tom acima do creme */
-  papel: '#F6F4EF',
+  /** azul-marinho principal da Ideally Studio 3D */
+  azul: '#001E5A',
+  /** laranja da marca, usado em destaques e ações */
+  laranja: '#F36C21',
+  /** cor principal de texto e superfícies escuras */
+  tinta: '#001E5A',
+  /** fundo quente do site */
+  creme: '#FFF8F2',
+  /** papel dos painéis sobrepostos */
+  papel: '#FFFFFF',
   /** bordas e divisórias sobre o claro */
-  linha: '#DFDACE',
+  linha: '#CBD5E5',
   /** divisória mais suave, dentro da sacola */
-  linhaSuave: '#E4E0D5',
+  linhaSuave: '#E1E7F0',
   /** texto secundário e rótulos */
-  suave: '#8A8578',
-  /** texto corrido secundário, mais escuro que o suave */
-  texto: '#55524A',
-  /** o único acento quente: links, remover, hover do CTA */
-  terracota: '#A8563A',
+  suave: '#66738C',
+  /** texto corrido secundário */
+  texto: '#44516A',
+  /** alias legado para usos de acento */
+  terracota: '#F36C21',
   /** fundo da opção escolhida no configurador */
-  selecionado: '#E9E5DA',
+  selecionado: '#EAF0F8',
   /** fundo das miniaturas no catálogo e na sacola */
-  ladrilho: '#E6E2D8',
+  ladrilho: '#EDF2F8',
   /** véu sobre a cena quando a sacola abre */
-  veu: 'rgba(20,20,15,0.32)',
+  veu: 'rgba(0,30,90,0.38)',
 
   /** divisória sobre o fundo escuro do Ateliê */
-  linhaEscura: '#2E2E28',
+  linhaEscura: '#365488',
   /** texto corrido sobre o fundo escuro do Ateliê */
-  textoEscuro: '#B5B0A4',
+  textoEscuro: '#C9D6EB',
 } as const;
 
 export const fonte = {
-  /** títulos e valores */
-  serif: 'var(--fonte-serif), Georgia, serif',
+  /** marca, títulos e valores */
+  display: 'var(--fonte-display), Montserrat, system-ui, sans-serif',
+  /** alias mantido para os componentes existentes */
+  serif: 'var(--fonte-display), Montserrat, system-ui, sans-serif',
   /** todo o resto */
   sans: 'var(--fonte-sans), system-ui, sans-serif',
 } as const;
