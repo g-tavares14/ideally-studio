@@ -1,6 +1,6 @@
-# Cria Forma Studio
+# Ideally Studio 3D
 
-An interactive 3D showroom website for **Cria Forma**, a made-to-order additive manufacturing (3D printing) atelier based in São Paulo. Visitors orbit a virtual showroom, pick up a product, configure its material/color/size, and add it to a cart — all rendered live in WebGL, no pre-made product photos.
+An interactive 3D showroom website for **Ideally Studio 3D**, a made-to-order additive manufacturing (3D printing) atelier based in São Paulo. Visitors orbit a virtual showroom, pick up a product, configure its material/color/size, and add it to a cart — all rendered live in WebGL, no pre-made product photos.
 
 ## Features
 

@@ -28,7 +28,7 @@ export default function Sacola({ itens, total, remover, fechar }: Props) {
         }}
       >
         <div style={{ display: 'flex', alignItems: 'baseline', justifyContent: 'space-between' }}>
-          <div style={{ fontFamily: fonte.serif, fontSize: 34 }}>Sacola</div>
+          <div style={{ fontFamily: fonte.serif, fontSize: 34, fontWeight: 700 }}>Sacola</div>
           <div
             className="cf-h-ink"
             onClick={fechar}
@@ -74,14 +74,16 @@ export default function Sacola({ itens, total, remover, fechar }: Props) {
                 }}
               >
                 <img
-                  src={i.thumb}
+                  src={i.thumb || undefined}
                   alt={i.nome}
                   style={{ width: '100%', height: '100%', objectFit: 'contain' }}
                 />
               </div>
               <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: 4 }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', gap: 12 }}>
-                  <div style={{ fontFamily: fonte.serif, fontSize: 20 }}>{i.nome}</div>
+                  <div style={{ fontFamily: fonte.serif, fontSize: 20, fontWeight: 600 }}>
+                    {i.nome}
+                  </div>
                   <div style={{ fontSize: 13.5, fontVariantNumeric: 'tabular-nums' }}>
                     {BRL(i.preco)}
                   </div>
@@ -150,6 +152,7 @@ export default function Sacola({ itens, total, remover, fechar }: Props) {
               style={{
                 fontFamily: fonte.serif,
                 fontSize: 30,
+                fontWeight: 700,
                 fontVariantNumeric: 'tabular-nums',
               }}
             >

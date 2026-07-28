@@ -28,14 +28,15 @@ export default function ShowroomCopy() {
         <div
           style={{
             fontFamily: fonte.serif,
-            fontSize: 62,
-            lineHeight: 0.96,
-            letterSpacing: '-0.02em',
+            fontSize: 55,
+            fontWeight: 700,
+            lineHeight: 0.98,
+            letterSpacing: '-0.04em',
           }}
         >
           Objetos
           <br />
-          <span style={{ fontStyle: 'italic' }}>impressos</span> camada
+          <span style={{ color: paleta.laranja }}>impressos</span> camada
           <br />
           por camada.
         </div>
@@ -50,6 +51,18 @@ export default function ShowroomCopy() {
           }}
         >
           Seis peças em fabricação aditiva, produzidas sob demanda no nosso ateliê em São Paulo.
+        </div>
+        <div
+          style={{
+            marginTop: 18,
+            color: paleta.azul,
+            fontSize: 11,
+            fontWeight: 600,
+            letterSpacing: '0.08em',
+            textTransform: 'uppercase',
+          }}
+        >
+          Transformando ideias em realidade
         </div>
       </div>
 

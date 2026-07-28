@@ -68,8 +68,9 @@ export default function ProdutoPanel({
         style={{
           fontFamily: fonte.serif,
           fontSize: 44,
+          fontWeight: 700,
           lineHeight: 1.02,
-          letterSpacing: '-0.02em',
+          letterSpacing: '-0.04em',
           margin: '12px 0 0',
         }}
       >
@@ -196,6 +197,7 @@ export default function ProdutoPanel({
             style={{
               fontFamily: fonte.serif,
               fontSize: 34,
+              fontWeight: 700,
               fontVariantNumeric: 'tabular-nums',
             }}
           >

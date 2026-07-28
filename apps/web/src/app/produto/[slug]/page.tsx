@@ -17,10 +17,10 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { slug } = await params;
   const produto = await buscarProduto(slug);
-  if (!produto) return { title: 'Peça não encontrada — Cria Forma Studio' };
+  if (!produto) return { title: 'Peça não encontrada — Ideally Studio 3D' };
 
   return {
-    title: `${produto.nome} — Cria Forma Studio`,
+    title: `${produto.nome} — Ideally Studio 3D`,
     description: produto.desc,
     openGraph: {
       title: `${produto.nome} — ${BRL(produto.preco)}`,

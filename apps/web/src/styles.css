@@ -2,7 +2,7 @@ html,
 body {
   margin: 0;
   padding: 0;
-  background: #efede6;
+  background: #fff8f2;
 }
 
 * {
@@ -10,12 +10,12 @@ body {
 }
 
 a {
-  color: #a8563a;
+  color: #f36c21;
   text-decoration: none;
 }
 
 a:hover {
-  color: #14140f;
+  color: #001e5a;
 }
 
 canvas {
@@ -56,30 +56,33 @@ canvas {
  */
 
 .cf-h-ink:hover {
-  color: #14140f !important;
+  color: #f36c21 !important;
 }
 
 .cf-h-cream:hover {
-  color: #efede6 !important;
+  color: #f36c21 !important;
 }
 
 .cf-h-underline:hover {
-  border-bottom-color: #14140f !important;
+  border-bottom-color: #f36c21 !important;
+  color: #f36c21 !important;
 }
 
 .cf-h-invert:hover {
-  background: #14140f !important;
-  color: #efede6 !important;
+  background: #f36c21 !important;
+  border-color: #f36c21 !important;
+  color: #001e5a !important;
 }
 
 .cf-h-border-ink:hover {
-  border-color: #14140f !important;
+  border-color: #f36c21 !important;
 }
 
 .cf-h-tile:hover {
-  background: #e0dbcf !important;
+  background: #e0e9f5 !important;
 }
 
 .cf-h-cta:hover {
-  background: #a8563a !important;
+  background: #f36c21 !important;
+  color: #001e5a !important;
 }

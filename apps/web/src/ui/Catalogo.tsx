@@ -54,7 +54,8 @@ export default function Catalogo({ produtos, filtro, escolherFiltro, thumb, abri
             style={{
               fontFamily: fonte.serif,
               fontSize: 48,
-              letterSpacing: '-0.02em',
+              fontWeight: 700,
+              letterSpacing: '-0.04em',
             }}
           >
             Catálogo
@@ -108,7 +109,7 @@ export default function Catalogo({ produtos, filtro, escolherFiltro, thumb, abri
               }}
             >
               <img
-                src={thumb(item.id)}
+                src={thumb(item.id) || undefined}
                 alt={item.nome}
                 style={{ width: '100%', height: '100%', objectFit: 'contain' }}
               />
