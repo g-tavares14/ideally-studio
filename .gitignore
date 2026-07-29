@@ -4,6 +4,18 @@ dist
 *.local
 .DS_Store
 
+# Caches e artefatos gerados por ferramentas de desenvolvimento
+*.tsbuildinfo
+.cache/
+.eslintcache
+.turbo/
+.vercel/
+coverage/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
 # Prisma
 packages/db/generated
 .env
