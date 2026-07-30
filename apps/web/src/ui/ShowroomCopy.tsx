@@ -4,6 +4,7 @@ export default function ShowroomCopy() {
   return (
     <>
       <div
+        className="cf-showroom-copy"
         style={{
           position: 'absolute',
           left: 40,
@@ -26,6 +27,7 @@ export default function ShowroomCopy() {
           Coleção Sedimento — 2026
         </div>
         <div
+          className="cf-showroom-copy__title"
           style={{
             fontFamily: fonte.serif,
             fontSize: 55,
@@ -67,6 +69,7 @@ export default function ShowroomCopy() {
       </div>
 
       <div
+        className="cf-showroom-tips"
         style={{
           position: 'absolute',
           right: 40,

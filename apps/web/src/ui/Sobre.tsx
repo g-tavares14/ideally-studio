@@ -23,6 +23,7 @@ const corpo: CSSProperties = {
 export default function Sobre() {
   return (
     <div
+      className="cf-about"
       style={{
         position: 'absolute',
         inset: 0,
@@ -30,7 +31,7 @@ export default function Sobre() {
         color: paleta.creme,
         zIndex: 70,
         overflowY: 'auto',
-        padding: '104px 40px 60px',
+        padding: '32px 40px 60px',
         animation: 'cfFade 0.35s ease both',
       }}
     >
@@ -50,6 +51,7 @@ export default function Sobre() {
       </Link>
 
       <div
+        className="cf-about__grid"
         style={{
           display: 'grid',
           gridTemplateColumns: '1.1fr 1fr',
@@ -72,6 +74,7 @@ export default function Sobre() {
             <BrandLogo variante="completa" />
           </div>
           <div
+            className="cf-about__title"
             style={{
               fontFamily: fonte.serif,
               fontSize: 48,

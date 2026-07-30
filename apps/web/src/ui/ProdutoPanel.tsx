@@ -33,6 +33,7 @@ export default function ProdutoPanel({
 }: Props) {
   return (
     <div
+      className="cf-product-panel"
       style={{
         position: 'absolute',
         top: 0,
@@ -42,7 +43,7 @@ export default function ProdutoPanel({
         background: paleta.papel,
         borderLeft: `1px solid ${paleta.linha}`,
         zIndex: 25,
-        padding: '104px 44px 40px',
+        padding: '32px 44px 40px',
         overflowY: 'auto',
         animation: 'cfRise 0.5s ease both',
       }}
