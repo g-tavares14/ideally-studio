@@ -2,12 +2,18 @@ import type { CSSProperties } from 'react';
 
 interface BrandLogoProps {
   variante?: 'compacta' | 'completa';
+  tema?: 'claro' | 'escuro';
   style?: CSSProperties;
 }
 
 /** Assinatura vetorial da Ideally Studio 3D para fundos claros ou escuros. */
-export default function BrandLogo({ variante = 'compacta', style }: BrandLogoProps) {
+export default function BrandLogo({
+  variante = 'compacta',
+  tema = 'claro',
+  style,
+}: BrandLogoProps) {
   const completa = variante === 'completa';
+  const corPrimaria = tema === 'escuro' ? '#FFF8F2' : '#001E5A';
 
   return (
     <svg
@@ -23,9 +29,9 @@ export default function BrandLogo({ variante = 'compacta', style }: BrandLogoPro
         strokeWidth={completa ? 5 : 4}
         transform={completa ? 'translate(5 15) scale(1.28)' : 'translate(3 7)'}
       >
-        <path d="M28 1 53 15.5 28 30 3 15.5Z" stroke="#001E5A" />
-        <path d="M3 15.5v28.7L28 59l25-14.8V15.5" stroke="#001E5A" />
-        <path d="m28 30 25 14.2M28 30 3 44.2" stroke="#001E5A" />
+        <path d="M28 1 53 15.5 28 30 3 15.5Z" stroke={corPrimaria} />
+        <path d="M3 15.5v28.7L28 59l25-14.8V15.5" stroke={corPrimaria} />
+        <path d="m28 30 25 14.2M28 30 3 44.2" stroke={corPrimaria} />
         <path d="M28 30v29M12.5 21.2 28 12l15.5 9.2L28 30Z" stroke="#F36C21" />
         <path d="M28 30 12.5 21.2v17.2L28 47.6" stroke="#F36C21" />
       </g>
@@ -44,7 +50,7 @@ export default function BrandLogo({ variante = 'compacta', style }: BrandLogoPro
       <text
         x={completa ? 84 : 69}
         y={completa ? 79 : 52}
-        fill="#001E5A"
+        fill={corPrimaria}
         fontFamily="var(--fonte-display), Montserrat, sans-serif"
         fontSize={completa ? 40 : 28}
         fontWeight="800"
@@ -69,7 +75,7 @@ export default function BrandLogo({ variante = 'compacta', style }: BrandLogoPro
           <text
             x="86"
             y="113"
-            fill="#001E5A"
+            fill={corPrimaria}
             fontFamily="var(--fonte-sans), system-ui, sans-serif"
             fontSize="13"
             fontWeight="600"

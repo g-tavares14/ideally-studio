@@ -11,15 +11,16 @@ interface Props {
 
 export default function Sacola({ itens, total, remover, fechar }: Props) {
   return (
-    <div style={{ position: 'absolute', inset: 0, zIndex: 80 }}>
+    <div className="cf-cart" style={{ position: 'absolute', inset: 0, zIndex: 80 }}>
       <div onClick={fechar} style={{ position: 'absolute', inset: 0, background: paleta.veu }} />
       <div
+        className="cf-cart__panel"
         style={{
           position: 'absolute',
           top: 0,
           right: 0,
           bottom: 0,
-          width: 460,
+          width: 'min(460px, 100%)',
           background: paleta.papel,
           padding: '44px 44px 34px',
           display: 'flex',

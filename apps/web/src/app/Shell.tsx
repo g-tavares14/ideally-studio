@@ -66,14 +66,14 @@ function Moldura({
   const router = useRouter();
 
   const { screen, sel } = telaDaRota(usePathname(), useParams(), produtos);
+  const temaNav = screen === 'sobre' ? 'escuro' : screen === 'showroom' ? 'transparente' : 'claro';
 
   return (
     <div
+      className="cf-shell"
       style={{
         position: 'relative',
         width: '100%',
-        height: '100vh',
-        minHeight: 720,
         overflow: 'hidden',
         background: paleta.creme,
         fontFamily: fonte.sans,
@@ -99,9 +99,13 @@ function Moldura({
         }}
       />
 
-      <Nav qtdSacola={sacola.itens.length} abrirSacola={() => setSacolaAberta(true)} />
+      <Nav
+        tema={temaNav}
+        qtdSacola={sacola.itens.length}
+        abrirSacola={() => setSacolaAberta(true)}
+      />
 
-      {children}
+      <main className="cf-route-content">{children}</main>
 
       {sacolaAberta && (
         <Sacola

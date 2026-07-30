@@ -17,17 +17,19 @@ export default function Catalogo({ produtos, filtro, escolherFiltro, thumb, abri
 
   return (
     <div
+      className="cf-catalog"
       style={{
         position: 'absolute',
         inset: 0,
         background: paleta.creme,
         zIndex: 30,
         overflowY: 'auto',
-        padding: '104px 40px 60px',
+        padding: '32px 40px 60px',
         animation: 'cfFade 0.35s ease both',
       }}
     >
       <div
+        className="cf-catalog__heading"
         style={{
           display: 'flex',
           alignItems: 'flex-end',
@@ -61,7 +63,7 @@ export default function Catalogo({ produtos, filtro, escolherFiltro, thumb, abri
             Catálogo
           </div>
         </div>
-        <div style={{ display: 'flex', gap: 8 }}>
+        <div className="cf-catalog__filters" style={{ display: 'flex', gap: 8 }}>
           {FILTROS.map((f) => {
             const ativo = filtro === f;
             return (
@@ -87,6 +89,7 @@ export default function Catalogo({ produtos, filtro, escolherFiltro, thumb, abri
       </div>
 
       <div
+        className="cf-catalog__grid"
         style={{
           display: 'grid',
           gridTemplateColumns: 'repeat(3, 1fr)',
