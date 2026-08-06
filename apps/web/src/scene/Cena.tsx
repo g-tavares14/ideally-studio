@@ -15,6 +15,8 @@ import { cor as paleta } from '../styles/tokens';
 /** Largura do ProdutoPanel — a peça é jogada para a esquerda para não ficar sob ele. */
 const PAINEL_PX = 440;
 const FATOR_MAX = Math.max(...TAMANHOS.map((t) => t.fator));
+const CAM_INTRO = new THREE.Vector3(0, 2.55, 9.6);
+const ALVO_INTRO = new THREE.Vector3(0, 1.3, 0);
 const CAM_SHOWROOM = new THREE.Vector3(0, 1.75, 6.4);
 const ALVO_SHOWROOM = new THREE.Vector3(0, 1.15, 0);
 const FOV = 38;
@@ -49,6 +51,10 @@ export interface CenaProps {
   mat: string;
   cor: number;
   tam: string;
+  /** câmera mais distante enquanto a hero institucional está em primeiro plano */
+  intro?: boolean;
+  /** remove a interpolação da câmera quando o visitante reduz movimento */
+  movimentoReduzido?: boolean;
   onPick: (i: number) => void;
 }
 
@@ -82,6 +88,8 @@ function Interior({
   mat,
   cor,
   tam,
+  intro,
+  movimentoReduzido,
   onPick,
 }: CenaProps) {
   const { gl } = useThree();
@@ -163,6 +171,8 @@ function Interior({
         screen={screen}
         sel={sel}
         autoOrbit={autoOrbit}
+        intro={intro}
+        movimentoReduzido={movimentoReduzido}
         controle={controle}
         lugares={lugares}
       />
@@ -192,6 +202,8 @@ interface RigProps {
   screen: Screen;
   sel: number | null;
   autoOrbit: boolean;
+  intro?: boolean;
+  movimentoReduzido?: boolean;
   controle: MutableRefObject<Controle>;
   lugares: Lugar[];
 }
@@ -201,7 +213,15 @@ interface RigProps {
  * sai da caixa padrão (`enquadrarCaixa`), não de offsets fixos: como toda peça
  * ocupa a mesma caixa, uma fórmula só enquadra as seis do mesmo jeito.
  */
-function CameraRig({ screen, sel, autoOrbit, controle, lugares }: RigProps) {
+function CameraRig({
+  screen,
+  sel,
+  autoOrbit,
+  intro,
+  movimentoReduzido,
+  controle,
+  lugares,
+}: RigProps) {
   const { camera, size } = useThree();
   const pos = useRef(CAM_SHOWROOM.clone());
   const alvo = useRef(ALVO_SHOWROOM.clone());
@@ -229,6 +249,9 @@ function CameraRig({ screen, sel, autoOrbit, controle, lugares }: RigProps) {
       const l = lugares[sel];
       a.set(l.x + enq.offsetX, l.alturaPedestal + enq.alvoY, l.z);
       p.set(l.x + enq.offsetX, l.alturaPedestal + enq.camY, l.z + enq.camZ);
+    } else if (screen === 'showroom' && intro) {
+      a.copy(ALVO_INTRO);
+      p.copy(CAM_INTRO);
     } else {
       a.copy(ALVO_SHOWROOM);
       p.copy(CAM_SHOWROOM);
@@ -240,8 +263,13 @@ function CameraRig({ screen, sel, autoOrbit, controle, lugares }: RigProps) {
       p.y = CAM_SHOWROOM.y + controle.current.orbit.pitch * 2.2;
     }
 
-    pos.current.lerp(p, 0.055);
-    alvo.current.lerp(a, 0.06);
+    if (movimentoReduzido) {
+      pos.current.copy(p);
+      alvo.current.copy(a);
+    } else {
+      pos.current.lerp(p, 0.055);
+      alvo.current.lerp(a, 0.06);
+    }
     camera.position.copy(pos.current);
     camera.lookAt(alvo.current);
   });

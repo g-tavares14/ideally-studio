@@ -26,7 +26,7 @@ export default function ShowroomCopy() {
         >
           Coleção Sedimento — 2026
         </div>
-        <div
+        <h1
           className="cf-showroom-copy__title"
           style={{
             fontFamily: fonte.serif,
@@ -34,6 +34,7 @@ export default function ShowroomCopy() {
             fontWeight: 700,
             lineHeight: 0.98,
             letterSpacing: '-0.04em',
+            margin: 0,
           }}
         >
           Objetos
@@ -41,7 +42,7 @@ export default function ShowroomCopy() {
           <span style={{ color: paleta.laranja }}>impressos</span> camada
           <br />
           por camada.
-        </div>
+        </h1>
         <div
           className="cf-pretty"
           style={{

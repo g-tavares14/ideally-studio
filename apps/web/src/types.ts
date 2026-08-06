@@ -18,6 +18,6 @@ export interface ParteGeo {
   rot?: [number, number, number];
 }
 
-export type Screen = 'showroom' | 'produto' | 'catalogo' | 'sobre';
+export type Screen = 'inicio' | 'showroom' | 'produto' | 'catalogo' | 'sobre';
 
 export type Thumbs = Record<string, string>;

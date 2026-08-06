@@ -23,13 +23,12 @@ const display = Montserrat({
 });
 
 export const metadata: Metadata = {
-  title: 'Ideally Studio 3D — Coleção Sedimento',
+  title: 'Ideally Studio 3D — Objetos que ganham forma',
   description:
-    'Ideally Studio 3D: transformando ideias em realidade com fabricação aditiva. ' +
-    'Conheça seis peças impressas sob demanda em São Paulo.',
+    'Ideally Studio 3D: objetos produzidos sob demanda com fabricação aditiva em São Paulo.',
   openGraph: {
-    title: 'Ideally Studio 3D — Coleção Sedimento',
-    description: 'Objetos impressos camada por camada, produzidos sob demanda em São Paulo.',
+    title: 'Ideally Studio 3D — Objetos que ganham forma',
+    description: 'Objetos produzidos sob demanda, camada por camada, em São Paulo.',
     type: 'website',
   },
 };
