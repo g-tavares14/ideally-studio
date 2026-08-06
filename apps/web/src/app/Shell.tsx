@@ -8,6 +8,7 @@ import type { Produto } from '@cria-forma/shared';
 import { Provedores, useConfigCtx, useSacolaCtx } from './contextos';
 import { cor as paleta, fonte } from '../styles/tokens';
 import Nav from '../ui/Nav';
+import RouteTransition from '../ui/RouteTransition';
 import Sacola from '../ui/Sacola';
 import type { Ambiente, Screen } from '../types';
 
@@ -40,7 +41,9 @@ export default function Shell({
 }
 
 /**
- * A moldura fixa: o `<Canvas>`, a navegação e a gaveta da sacola.
+ * A moldura fixa: o `<Canvas>` das rotas secundárias, a navegação e a gaveta
+ * da sacola. Na home, o Canvas do showroom vive dentro da segunda seção para
+ * acompanhar o scroll da experiência.
  *
  * Isto vive no layout, e não numa página, de propósito. No App Router o layout
  * persiste entre navegações — se o `<Canvas>` estivesse numa página, cada
@@ -66,7 +69,12 @@ function Moldura({
   const router = useRouter();
 
   const { screen, sel } = telaDaRota(usePathname(), useParams(), produtos);
-  const temaNav = screen === 'sobre' ? 'escuro' : screen === 'showroom' ? 'transparente' : 'claro';
+  const temaNav =
+    screen === 'sobre'
+      ? 'escuro'
+      : screen === 'showroom' || screen === 'inicio'
+        ? 'transparente'
+        : 'claro';
 
   return (
     <div
@@ -81,23 +89,25 @@ function Moldura({
         userSelect: 'none',
       }}
     >
-      <Cena
-        ambiente={ambiente}
-        autoOrbit={autoOrbit}
-        corPeca={corPeca}
-        produtos={produtos}
-        screen={screen}
-        sel={sel}
-        mat={config.mat}
-        cor={config.cor}
-        tam={config.tam}
-        onPick={(i: number) => {
-          // `router.push`, nunca `location.assign`: navegação de cliente é o
-          // que preserva o contexto WebGL entre as rotas.
-          config.reiniciar();
-          router.push('/produto/' + produtos[i].id);
-        }}
-      />
+      {screen !== 'inicio' && (
+        <Cena
+          ambiente={ambiente}
+          autoOrbit={autoOrbit}
+          corPeca={corPeca}
+          produtos={produtos}
+          screen={screen}
+          sel={sel}
+          mat={config.mat}
+          cor={config.cor}
+          tam={config.tam}
+          onPick={(i: number) => {
+            // `router.push`, nunca `location.assign`: navegação de cliente é o
+            // que preserva o contexto WebGL entre as rotas.
+            config.reiniciar();
+            router.push('/produto/' + produtos[i].id);
+          }}
+        />
+      )}
 
       <Nav
         tema={temaNav}
@@ -105,7 +115,9 @@ function Moldura({
         abrirSacola={() => setSacolaAberta(true)}
       />
 
-      <main className="cf-route-content">{children}</main>
+      <main className="cf-route-content">
+        <RouteTransition>{children}</RouteTransition>
+      </main>
 
       {sacolaAberta && (
         <Sacola
@@ -130,6 +142,8 @@ function telaDaRota(
   params: ReturnType<typeof useParams>,
   produtos: Produto[],
 ): { screen: Screen; sel: number | null } {
+  if (pathname === '/') return { screen: 'inicio', sel: null };
+  if (pathname.startsWith('/showroom')) return { screen: 'showroom', sel: null };
   if (pathname.startsWith('/produto/')) {
     const slug = typeof params.slug === 'string' ? params.slug : '';
     const i = produtos.findIndex((p) => p.id === slug);
@@ -137,5 +151,5 @@ function telaDaRota(
   }
   if (pathname.startsWith('/catalogo')) return { screen: 'catalogo', sel: null };
   if (pathname.startsWith('/sobre')) return { screen: 'sobre', sel: null };
-  return { screen: 'showroom', sel: null };
+  return { screen: 'inicio', sel: null };
 }

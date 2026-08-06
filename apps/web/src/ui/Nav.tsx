@@ -27,7 +27,7 @@ export default function Nav({ tema, qtdSacola, abrirSacola }: Props) {
         </Link>
 
         <div className="cf-site-nav__links">
-          <Link className="cf-h-underline" href="/" style={link}>
+          <Link className="cf-h-underline" href="/#showroom" style={link}>
             Showroom
           </Link>
           <Link className="cf-h-underline" href="/catalogo" style={link}>

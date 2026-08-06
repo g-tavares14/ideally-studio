@@ -25,6 +25,25 @@ npm run build     # type-check and build for production
 npm run preview   # preview the production build
 ```
 
+## Pull requests automáticos pelo Codex
+
+O hook nativo em `.codex/hooks.json` observa comandos Bash executados pelo
+Codex. Após um `git commit` bem-sucedido em uma branch de trabalho, ele envia
+a branch para `origin` e cria um pull request em rascunho, desde que ainda não
+exista um PR aberto. O hook ignora `main`, `master`, `develop` e a branch-padrão
+do remoto.
+
+Pré-requisitos: [GitHub CLI](https://cli.github.com/) instalado e autenticado.
+
+```bash
+gh auth login
+```
+
+Ao iniciar o Codex neste repositório, revise e aprove o hook com `/hooks`. O
+Codex só carrega hooks locais de projetos confiáveis e não executa hooks de
+comando sem essa aprovação. Para desativá-lo, use `/hooks` no Codex; commits
+feitos fora do Codex não acionam essa automação.
+
 ## Project structure
 
 ```

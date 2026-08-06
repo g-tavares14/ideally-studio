@@ -41,7 +41,7 @@ export default function Catalogo({ produtos, filtro, escolherFiltro, thumb, abri
         <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
           <Link
             className="cf-h-ink"
-            href="/"
+            href="/#showroom"
             style={{
               fontSize: 12,
               letterSpacing: '0.06em',

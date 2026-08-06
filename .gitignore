@@ -27,3 +27,6 @@ packages/db/generated
 *.tfvars
 !*.tfvars.example
 .terraform.lock.hcl
+
+# Configuração local de IDE
+.idea/

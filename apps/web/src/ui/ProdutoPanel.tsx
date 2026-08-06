@@ -50,7 +50,7 @@ export default function ProdutoPanel({
     >
       <Link
         className="cf-h-ink"
-        href="/"
+        href="/#showroom"
         style={{
           display: 'block',
           fontSize: 12,
