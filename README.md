@@ -1,18 +1,18 @@
 # Ideally Studio 3D
 
-An interactive 3D showroom website for **Ideally Studio 3D**, a made-to-order additive manufacturing (3D printing) atelier based in São Paulo. Visitors orbit a virtual showroom, pick up a product, configure its material/color/size, and add it to a cart — all rendered live in WebGL, no pre-made product photos.
+An institutional catalog and 3D editor for **Ideally Studio 3D**, a made-to-order additive manufacturing (3D printing) atelier based in São Paulo. Visitors browse procedural models, open a piece from the catalog, configure its material/color/size, and add it to a cart — all rendered from the same 3D geometry, with no pre-made product photos.
 
 ## Features
 
-- **3D showroom** — products are arranged on pedestals in a scene you can orbit and click into, built with Three.js and React Three Fiber.
+- **3D catalog previews** — every product card receives a thumbnail rendered from the procedural model used by the editor.
 - **Procedural product geometry** — every piece (vase, ring, napkin holder, controller stand, etc.) is generated from primitive geometries in code, not loaded 3D model files.
-- **Live configurator** — swap material (PLA, ceramic resin, metal deposition), color, and size, and see the change applied to the 3D piece and price in real time.
-- **Catalog & cart** — a 2D catalog view with filters, and a cart ("Sacola") that carries auto-generated thumbnails rendered from the same 3D geometry.
-- **Light/dark showroom ambience** and an "About the atelier" page with studio info.
+- **Live product editor** — open a model from the catalog, rotate it, and swap material (PLA, ceramic resin, metal deposition), color, and size while the price updates in real time.
+- **Catalog & cart** — filter the collection and add the configured piece to a cart ("Sacola") with an auto-generated thumbnail from the same 3D geometry.
+- **Institutional home** — an interactive presentation of the atelier's process, from intention to fabrication and manual finishing.
 
 ## Tech stack
 
-- [React 18](https://react.dev/) + TypeScript
+- [React](https://react.dev/) + TypeScript
 - [Three.js](https://threejs.org/) via [React Three Fiber](https://r3f.docs.pmnd.rs/) + [drei](https://drei.docs.pmnd.rs/)
 - [Next.js](https://nextjs.org/) for the web application
 
@@ -47,7 +47,7 @@ feitos fora do Codex não acionam essa automação.
 ## Project structure
 
 ```
-apps/web/        # Next.js application and 3D showroom
+apps/web/        # Next.js application, catalog, and 3D product editor
 packages/shared/ # shared catalog, prices, and cart types
 packages/db/     # Prisma schema, seed, and migrations
 infra/           # Terraform infrastructure definitions

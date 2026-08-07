@@ -51,7 +51,7 @@ export default function Sacola({ itens, total, remover, fechar }: Props) {
         >
           {itens.length === 0 && (
             <div style={{ fontSize: 14, color: paleta.suave, lineHeight: 1.6 }}>
-              Sua sacola está vazia. Escolha uma peça no showroom para começar.
+              Sua sacola está vazia. Escolha uma peça no catálogo para começar.
             </div>
           )}
           {itens.map((i) => (

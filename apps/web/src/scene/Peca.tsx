@@ -15,7 +15,8 @@ export interface PecaProps {
  * de modo que quem a monta só precisa posicionar o topo do pedestal.
  *
  * O acabamento entra por prop — nada é mutado. É por isso que voltar ao
- * showroom devolve a peça ao padrão sozinho: basta o React renderizar de novo.
+ * O editor recebe o acabamento por props, então cada alteração no painel chega
+ * ao modelo sem mutar a geometria compartilhada.
  */
 export default function Peca({ id, cor, rough, metal, opacity }: PecaProps) {
   const { partes, encaixe } = modeloDe(id);

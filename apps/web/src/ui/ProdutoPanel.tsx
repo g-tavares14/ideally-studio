@@ -50,7 +50,7 @@ export default function ProdutoPanel({
     >
       <Link
         className="cf-h-ink"
-        href="/#showroom"
+        href="/catalogo"
         style={{
           display: 'block',
           fontSize: 12,
@@ -61,7 +61,7 @@ export default function ProdutoPanel({
           textDecoration: 'none',
         }}
       >
-        ← Voltar ao showroom
+        ← Voltar ao catálogo
       </Link>
 
       <div style={eyebrow('0.24em')}>{p.cat}</div>
@@ -82,6 +82,19 @@ export default function ProdutoPanel({
         style={{ fontSize: 14, lineHeight: 1.65, color: paleta.texto, marginTop: 16 }}
       >
         {p.desc}
+      </div>
+
+      <div
+        style={{
+          marginTop: 22,
+          padding: '12px 14px',
+          borderLeft: `2px solid ${paleta.laranja}`,
+          color: paleta.texto,
+          fontSize: 12.5,
+          lineHeight: 1.55,
+        }}
+      >
+        Gire o modelo ao lado e ajuste o acabamento, a cor e a escala antes de encomendar.
       </div>
 
       <div

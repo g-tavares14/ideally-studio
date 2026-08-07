@@ -12,10 +12,10 @@ const FOV = 30;
  * Renderiza cada peça isolada num renderer fora de tela e devolve data URLs.
  * Usadas pelas miniaturas do catálogo e pelas linhas da sacola.
  *
- * As peças passam pela mesma caixa padrão do showroom, então a câmera é fixa:
+ * As peças passam pela mesma caixa padrão do editor, então a câmera é fixa:
  * todas as miniaturas saem no mesmo tamanho aparente.
  */
-export function gerarThumbs(corPeca: string, produtos: Produto[]): Thumbs {
+export function gerarThumbs(corPreview: string, produtos: Produto[]): Thumbs {
   const r = new THREE.WebGLRenderer({
     antialias: true,
     alpha: true,
@@ -35,13 +35,13 @@ export function gerarThumbs(corPeca: string, produtos: Produto[]): Thumbs {
   sc.add(d2);
 
   // distância constante, derivada da caixa — as miniaturas guardam entre si a
-  // mesma proporção que as peças têm no showroom; só a mira acompanha a peça
+  // mesma proporção que as peças têm no editor; só a mira acompanha a peça
   const cam = new THREE.PerspectiveCamera(FOV, 520 / 400, 0.1, 50);
   const dist =
     (Math.max(CAIXA_PADRAO.altura, CAIXA_PADRAO.largura) * 1.35) / Math.tan((FOV / 2) * RAD);
 
   const mat = new THREE.MeshStandardMaterial({
-    color: new THREE.Color(corPeca),
+    color: new THREE.Color(corPreview),
     roughness: MATERIAIS[0].rough,
     metalness: MATERIAIS[0].metal,
   });
