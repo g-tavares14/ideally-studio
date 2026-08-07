@@ -15,7 +15,7 @@ const FOV = 30;
  * As peças passam pela mesma caixa padrão do editor, então a câmera é fixa:
  * todas as miniaturas saem no mesmo tamanho aparente.
  */
-export function gerarThumbs(corPeca: string, produtos: Produto[]): Thumbs {
+export function gerarThumbs(corPreview: string, produtos: Produto[]): Thumbs {
   const r = new THREE.WebGLRenderer({
     antialias: true,
     alpha: true,
@@ -41,7 +41,7 @@ export function gerarThumbs(corPeca: string, produtos: Produto[]): Thumbs {
     (Math.max(CAIXA_PADRAO.altura, CAIXA_PADRAO.largura) * 1.35) / Math.tan((FOV / 2) * RAD);
 
   const mat = new THREE.MeshStandardMaterial({
-    color: new THREE.Color(corPeca),
+    color: new THREE.Color(corPreview),
     roughness: MATERIAIS[0].rough,
     metalness: MATERIAIS[0].metal,
   });

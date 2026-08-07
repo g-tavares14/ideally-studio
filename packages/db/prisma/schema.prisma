@@ -43,7 +43,7 @@ model Produto {
   prazo     String
   desc      String
 
-  /// posição no showroom e no catálogo
+  /// posição de exibição no catálogo
   ordem Int @unique
 
   criadoEm     DateTime @default(now())
