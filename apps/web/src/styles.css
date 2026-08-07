@@ -110,52 +110,29 @@ canvas {
   pointer-events: auto;
 }
 
+.cf-product-editor {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-width: 0;
+  min-height: 0;
+  overflow: hidden;
+  background: #fff8f2;
+}
+
+.cf-product-canvas {
+  position: absolute;
+  inset: 0;
+  touch-action: none;
+  background: #fff8f2;
+}
+
 .cf-route-transition {
   position: absolute;
   inset: 0;
   min-width: 0;
   min-height: 0;
   pointer-events: auto;
-  will-change: opacity, transform;
-}
-
-.cf-experience-stage {
-  position: absolute;
-  inset: 0;
-  overflow: hidden;
-  outline: none;
-  touch-action: pan-y;
-}
-
-.cf-experience-stage:focus-visible {
-  outline: 2px solid #f36c21;
-  outline-offset: -6px;
-}
-
-.cf-experience-stage__canvas-layer,
-.cf-experience-stage__hero-layer,
-.cf-experience-stage__showroom-layer {
-  position: absolute;
-  inset: 0;
-}
-
-.cf-experience-stage__canvas-layer {
-  z-index: 0;
-  opacity: 0.2;
-  transform: scale(1.04);
-  transform-origin: center;
-  will-change: opacity, transform;
-}
-
-.cf-experience-stage__hero-layer {
-  z-index: 20;
-  will-change: opacity, transform;
-}
-
-.cf-experience-stage__showroom-layer {
-  z-index: 15;
-  opacity: 0;
-  transform: translateY(26px);
   will-change: opacity, transform;
 }
 
@@ -455,20 +432,6 @@ canvas {
     width: min(440px, 100%) !important;
   }
 
-  .cf-showroom-copy {
-    left: 20px !important;
-    bottom: 24px !important;
-    max-width: calc(100% - 40px) !important;
-  }
-
-  .cf-showroom-copy__title {
-    font-size: clamp(38px, 12vw, 50px) !important;
-  }
-
-  .cf-showroom-tips {
-    display: none !important;
-  }
-
   .cf-home-hero {
     display: flex;
     height: auto;
@@ -477,11 +440,6 @@ canvas {
     min-height: 100%;
     overflow: visible;
     padding: 34px 20px 64px;
-  }
-
-  .cf-experience-stage__hero-layer {
-    overflow-y: auto;
-    overscroll-behavior: contain;
   }
 
   .cf-home-hero h1 {

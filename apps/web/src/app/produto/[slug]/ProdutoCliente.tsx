@@ -1,9 +1,12 @@
 'use client';
 
+import dynamic from 'next/dynamic';
 import { BRL, CORES, MATERIAIS, precoDe } from '@cria-forma/shared';
 import type { Produto } from '@cria-forma/shared';
 import { useConfigCtx, useSacolaCtx, useThumb } from '../../contextos';
 import ProdutoPanel from '../../../ui/ProdutoPanel';
+
+const Cena = dynamic(() => import('../../../scene/Cena'), { ssr: false });
 
 export default function ProdutoCliente({ produto }: { produto: Produto }) {
   const config = useConfigCtx();
@@ -28,17 +31,20 @@ export default function ProdutoCliente({ produto }: { produto: Produto }) {
   };
 
   return (
-    <ProdutoPanel
-      p={produto}
-      precoFmt={BRL(preco)}
-      mat={config.mat}
-      cor={config.cor}
-      tam={config.tam}
-      adicionado={config.adicionado}
-      escolherMat={config.escolherMat}
-      escolherCor={config.escolherCor}
-      escolherTam={config.escolherTam}
-      adicionar={adicionar}
-    />
+    <div className="cf-product-editor">
+      <Cena ambiente="Claro" produto={produto} mat={config.mat} cor={config.cor} tam={config.tam} />
+      <ProdutoPanel
+        p={produto}
+        precoFmt={BRL(preco)}
+        mat={config.mat}
+        cor={config.cor}
+        tam={config.tam}
+        adicionado={config.adicionado}
+        escolherMat={config.escolherMat}
+        escolherCor={config.escolherCor}
+        escolherTam={config.escolherTam}
+        adicionar={adicionar}
+      />
+    </div>
   );
 }

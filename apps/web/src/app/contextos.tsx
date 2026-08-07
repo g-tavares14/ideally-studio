@@ -12,8 +12,7 @@ import type { Thumbs } from '../types';
 /**
  * O estado que atravessa rotas.
  *
- * Com o Canvas da moldura ou da home e os painéis nas rotas, a sacola, a
- * configuração do produto e o catálogo passaram a ter leitores em árvores
+ * A sacola, a configuração do produto e o catálogo vivem em árvores
  * diferentes — daí o contexto. Não é estado global por preguiça: é o mínimo
  * que precisa sobreviver à navegação.
  */
@@ -23,15 +22,7 @@ const ConfigCtx = createContext<ConfigProduto | null>(null);
 const ProdutosCtx = createContext<Produto[]>([]);
 const ThumbsCtx = createContext<Thumbs>({});
 
-export function Provedores({
-  children,
-  corPeca,
-  produtos,
-}: {
-  children: ReactNode;
-  corPeca: string;
-  produtos: Produto[];
-}) {
+export function Provedores({ children, produtos }: { children: ReactNode; produtos: Produto[] }) {
   const sacola = useSacola();
   const config = useConfigProduto();
   const pathname = usePathname();
@@ -39,16 +30,16 @@ export function Provedores({
   const precisaThumbs = pathname.startsWith('/catalogo') || pathname.startsWith('/produto/');
 
   // As miniaturas saem de um renderer próprio, fora de tela. Só são criadas
-  // quando catálogo ou produto precisam delas; a hero inicial não deve pagar
-  // o custo de um segundo contexto WebGL.
+  // quando catálogo ou produto precisam delas; a hero inicial não abre
+  // nenhum contexto WebGL.
   useEffect(() => {
     if (!precisaThumbs) return;
 
     // Os 60 ms adiam a criação do segundo contexto WebGL para depois do
-    // primeiro quadro do Canvas.
-    const t = window.setTimeout(() => setThumbs(gerarThumbs(corPeca, produtos)), 60);
+    // primeiro quadro da rota.
+    const t = window.setTimeout(() => setThumbs(gerarThumbs('#E4DFD2', produtos)), 60);
     return () => window.clearTimeout(t);
-  }, [corPeca, produtos, precisaThumbs]);
+  }, [produtos, precisaThumbs]);
 
   return (
     <SacolaCtx.Provider value={sacola}>

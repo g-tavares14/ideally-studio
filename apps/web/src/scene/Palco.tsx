@@ -1,36 +1,10 @@
 import type { Ambiente } from '../types';
 
-export interface Lugar {
-  x: number;
-  z: number;
-  /** altura do pedestal — o topo, onde o chão da caixa da peça se apoia */
-  alturaPedestal: number;
-}
+/** Altura da base onde o modelo começa, medida a partir do chão da cena. */
+export const PLATAFORMA_ALTURA = 0.72;
 
-/**
- * Os lugares em arco raso, na ordem do catálogo.
- *
- * Depende só de *quantos* produtos existem, não de quais — por isso recebe a
- * quantidade em vez de importar o catálogo. É o que permite ao catálogo vir do
- * banco sem que a cena precise saber disso.
- */
-export function lugares(quantidade: number): Lugar[] {
-  return Array.from({ length: quantidade }, (_, i) => {
-    const a = (i / (quantidade - 1) - 0.5) * 2.05;
-    const R = 3.9;
-    return {
-      x: Math.sin(a) * R,
-      z: -Math.cos(a) * R * 0.42 - 0.4,
-      alturaPedestal: 1.02 - Math.abs(a) * 0.06,
-    };
-  });
-}
-
-/** Largura do topo do pedestal. A caixa padrão é menor que isto de propósito. */
-export const TOPO_PEDESTAL = 0.72;
-
-/** Tudo que não é peça: fundo, chão, parede, luzes e pedestais. */
-export default function Palco({ ambiente, lugares }: { ambiente: Ambiente; lugares: Lugar[] }) {
+/** Tudo que não é peça: fundo, chão, parede, luzes e a base de edição. */
+export default function Palco({ ambiente }: { ambiente: Ambiente }) {
   const penumbra = ambiente === 'Penumbra';
   const bg = penumbra ? '#00143D' : '#FFF8F2';
   const corChao = penumbra ? '#082555' : '#F0F4FA';
@@ -67,12 +41,10 @@ export default function Palco({ ambiente, lugares }: { ambiente: Ambiente; lugar
       />
       <directionalLight position={[-5, 3.5, 2.5]} intensity={penumbra ? 0.35 : 0.55} />
 
-      {lugares.map((l, i) => (
-        <mesh key={i} position={[l.x, l.alturaPedestal / 2, l.z]} castShadow receiveShadow>
-          <boxGeometry args={[TOPO_PEDESTAL, l.alturaPedestal, TOPO_PEDESTAL]} />
-          <meshStandardMaterial color={corPedestal} roughness={0.9} />
-        </mesh>
-      ))}
+      <mesh position={[0, PLATAFORMA_ALTURA / 2, 0]} castShadow receiveShadow>
+        <boxGeometry args={[1.08, PLATAFORMA_ALTURA, 1.08]} />
+        <meshStandardMaterial color={corPedestal} roughness={0.9} />
+      </mesh>
     </>
   );
 }

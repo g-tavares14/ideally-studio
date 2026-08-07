@@ -10,7 +10,7 @@ export interface Modelo {
 const cache = new Map<string, Modelo>();
 
 /**
- * O modelo vivo de uma peça: geometria mais o encaixe na caixa padrão.
+ * O modelo vivo de uma peça: geometria mais o encaixe na caixa padrão do editor.
  *
  * Fica em cache pela vida da página — são seis produtos, a geometria é
  * determinística e a cena inteira compartilha as mesmas instâncias. Quem
