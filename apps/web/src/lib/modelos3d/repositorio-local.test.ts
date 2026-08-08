@@ -149,6 +149,14 @@ describe('validação da API local', () => {
     expect(
       requisicaoLocalPermitida(new Request('https://exemplo.com/api/admin/modelos'), 'development'),
     ).toBe(false);
+    expect(
+      requisicaoLocalPermitida(
+        new Request('http://localhost:3000/api/admin/modelos', {
+          headers: { Host: 'exemplo.com' },
+        }),
+        'development',
+      ),
+    ).toBe(false);
   });
 
   it('monta a entrada após validar 3MF e GLB', async () => {

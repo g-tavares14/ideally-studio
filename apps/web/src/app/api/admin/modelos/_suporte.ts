@@ -16,13 +16,19 @@ export function requisicaoLocalPermitida(
 ): boolean {
   if (ambiente !== 'development') return false;
 
-  const hostname = new URL(request.url).hostname.toLowerCase();
-  return (
-    hostname === 'localhost' ||
-    hostname === '127.0.0.1' ||
-    hostname === '::1' ||
-    hostname === '[::1]'
-  );
+  const hostEncaminhado = request.headers.get('x-forwarded-host')?.split(',')[0]?.trim();
+  const host = hostEncaminhado || request.headers.get('host') || new URL(request.url).host;
+  const hostname = extrairHostname(host);
+  return hostname === 'localhost' || hostname === '127.0.0.1' || hostname === '::1';
+}
+
+function extrairHostname(host: string): string {
+  const normalizado = host.trim().toLowerCase();
+  if (normalizado.startsWith('[')) {
+    const fimIpv6 = normalizado.indexOf(']');
+    return fimIpv6 > 0 ? normalizado.slice(1, fimIpv6) : normalizado;
+  }
+  return normalizado.split(':')[0] ?? '';
 }
 
 export function respostaNaoEncontrada(): Response {
