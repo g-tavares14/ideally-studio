@@ -1,5 +1,11 @@
-import HeroInstitucional from './HeroInstitucional';
+'use client';
+
+import { useProdutosCtx, useThumb } from '../app/contextos';
+import HomeEditorial from './HomeEditorial';
 
 export default function HomeExperience() {
-  return <HeroInstitucional />;
+  const produtos = useProdutosCtx();
+  const thumb = useThumb();
+
+  return <HomeEditorial produtos={produtos} thumb={thumb} />;
 }

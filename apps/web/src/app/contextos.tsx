@@ -27,11 +27,12 @@ export function Provedores({ children, produtos }: { children: ReactNode; produt
   const config = useConfigProduto();
   const pathname = usePathname();
   const [thumbs, setThumbs] = useState<Thumbs>({});
-  const precisaThumbs = pathname.startsWith('/catalogo') || pathname.startsWith('/produto/');
+  const precisaThumbs =
+    pathname === '/' || pathname.startsWith('/catalogo') || pathname.startsWith('/produto/');
 
   // As miniaturas saem de um renderer próprio, fora de tela. Só são criadas
-  // quando catálogo ou produto precisam delas; a hero inicial não abre
-  // nenhum contexto WebGL.
+  // quando a home, o catálogo ou um produto precisam delas — as demais telas
+  // (ateliê, admin) não abrem nenhum contexto WebGL.
   useEffect(() => {
     if (!precisaThumbs) return;
 
