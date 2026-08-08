@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from 'next';
-import { Instrument_Sans, Montserrat } from 'next/font/google';
+import { Instrument_Sans, Montserrat, Playfair_Display, Work_Sans } from 'next/font/google';
 import { listarProdutos } from '../lib/catalogo';
 import Shell from './Shell';
 import AnimatedFavicon from '../ui/AnimatedFavicon';
@@ -19,6 +19,23 @@ const display = Montserrat({
   subsets: ['latin'],
   weight: ['400', '600', '700', '800'],
   variable: '--fonte-display',
+  display: 'swap',
+});
+
+// Identidade tipográfica só da home editorial (`HomeEditorial`) — as demais
+// telas seguem em Instrument Sans / Montserrat acima.
+const editorialDisplay = Playfair_Display({
+  subsets: ['latin'],
+  weight: ['500', '700'],
+  style: ['normal', 'italic'],
+  variable: '--fonte-editorial-display',
+  display: 'swap',
+});
+
+const editorialSans = Work_Sans({
+  subsets: ['latin'],
+  weight: ['400', '500', '600'],
+  variable: '--fonte-editorial-sans',
   display: 'swap',
 });
 
@@ -44,7 +61,10 @@ export default async function RootLayout({ children }: { children: React.ReactNo
   const produtos = await listarProdutos();
 
   return (
-    <html lang="pt-BR" className={`${sans.variable} ${display.variable}`}>
+    <html
+      lang="pt-BR"
+      className={`${sans.variable} ${display.variable} ${editorialDisplay.variable} ${editorialSans.variable}`}
+    >
       <body>
         <AnimatedFavicon />
         <Shell produtos={produtos}>{children}</Shell>
