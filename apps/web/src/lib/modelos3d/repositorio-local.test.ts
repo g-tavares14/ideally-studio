@@ -1,6 +1,6 @@
 // @vitest-environment node
 
-import { mkdir, mkdtemp, readdir, rm, unlink, writeFile } from 'node:fs/promises';
+import { mkdtemp, readdir, rm, unlink } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { afterEach, describe, expect, it } from 'vitest';
@@ -104,13 +104,8 @@ describe('RepositorioModelos3DLocal', () => {
 });
 
 describe('composição do armazenamento local', () => {
-  it('resolve doc/modelos a partir da raiz do monorepo', async () => {
+  it('resolve doc/modelos a partir do workspace web', async () => {
     const raiz = await criarDiretorioTemporario();
-    await Promise.all([
-      mkdir(join(raiz, 'apps/web'), { recursive: true }),
-      mkdir(join(raiz, 'packages'), { recursive: true }),
-    ]);
-    await writeFile(join(raiz, 'apps/web/package.json'), '{}', 'utf8');
 
     expect(resolverDiretorioModelos3D(undefined, join(raiz, 'apps/web'))).toBe(
       join(raiz, 'doc/modelos'),
