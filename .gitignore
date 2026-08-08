@@ -30,3 +30,6 @@ packages/db/generated
 
 # Configuração local de IDE
 .idea/
+
+# Modelos 3D enviados pelo protótipo local
+doc/modelos/**

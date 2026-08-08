@@ -737,3 +737,429 @@ canvas {
     transition-duration: 0.01ms !important;
   }
 }
+
+/* Protótipo local de entrada e inspeção de modelos 3D. */
+.cf-admin-modelos {
+  height: 100%;
+  overflow-y: auto;
+  padding: clamp(34px, 5vw, 72px) clamp(24px, 6vw, 88px) 72px;
+  background: #fff8f2;
+  color: #001e5a;
+}
+
+.cf-admin-modelos__header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 40px;
+  max-width: 1320px;
+  margin: 0 auto;
+}
+
+.cf-admin-modelos__header > div {
+  max-width: 720px;
+}
+
+.cf-admin-modelos__eyebrow {
+  display: block;
+  color: #66738c;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  line-height: 1.5;
+  text-transform: uppercase;
+}
+
+.cf-admin-modelos h1,
+.cf-admin-modelos h2,
+.cf-admin-modelos p {
+  margin-top: 0;
+}
+
+.cf-admin-modelos h1 {
+  margin-bottom: 18px;
+  font-family: var(--fonte-display), Montserrat, system-ui, sans-serif;
+  font-size: clamp(42px, 6vw, 74px);
+  letter-spacing: -0.065em;
+  line-height: 1;
+}
+
+.cf-admin-modelos__header h1 {
+  margin-top: 18px;
+}
+
+.cf-admin-modelos__header p {
+  max-width: 620px;
+  margin-bottom: 0;
+  color: #44516a;
+  font-size: 15px;
+  line-height: 1.65;
+}
+
+.cf-admin-modelos button,
+.cf-admin-modelos input {
+  font: inherit;
+}
+
+.cf-admin-modelos button {
+  cursor: pointer;
+}
+
+.cf-admin-modelos button:disabled {
+  cursor: wait;
+  opacity: 0.55;
+}
+
+.cf-admin-modelos__primary {
+  flex: none;
+  border: 1px solid #001e5a;
+  padding: 14px 18px;
+  background: #001e5a;
+  color: #fff8f2;
+  font-size: 12px !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.cf-admin-modelos__primary:hover:not(:disabled) {
+  border-color: #f36c21;
+  background: #f36c21;
+  color: #001e5a;
+}
+
+.cf-admin-modelos__notice {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  max-width: 1320px;
+  margin: 42px auto 0;
+  border: 1px solid #e4bb9f;
+  padding: 14px 18px;
+  background: #fff0e4;
+  color: #663310;
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.cf-admin-modelos__notice strong {
+  flex: none;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.cf-admin-modelos__workspace {
+  display: grid;
+  max-width: 1320px;
+  grid-template-columns: minmax(320px, 0.86fr) minmax(420px, 1.14fr);
+  gap: 28px;
+  margin: 28px auto 0;
+}
+
+.cf-admin-modelos__list,
+.cf-admin-modelos__viewer {
+  min-width: 0;
+  border: 1px solid #cbd5e5;
+  background: #fffdf9;
+}
+
+.cf-admin-modelos__section-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  min-height: 62px;
+  border-bottom: 1px solid #cbd5e5;
+  padding: 17px 20px;
+}
+
+.cf-admin-modelos__section-heading h2 {
+  margin-bottom: 0;
+  font-family: var(--fonte-display), Montserrat, system-ui, sans-serif;
+  font-size: 16px;
+  letter-spacing: -0.02em;
+}
+
+.cf-admin-modelos__section-heading span {
+  overflow: hidden;
+  color: #66738c;
+  font-size: 11px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.cf-admin-modelos__list > p,
+.cf-admin-modelos__empty {
+  margin: 0;
+  padding: 48px 20px;
+  color: #66738c;
+  font-size: 13px;
+  text-align: center;
+}
+
+.cf-admin-modelos__empty {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.cf-admin-modelos__empty strong {
+  color: #001e5a;
+}
+
+.cf-admin-modelos__list ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.cf-admin-modelos__list li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  border-bottom: 1px solid #e1e6ef;
+  padding: 18px 20px;
+}
+
+.cf-admin-modelos__list li:last-child {
+  border-bottom: 0;
+}
+
+.cf-admin-modelos__list li > div {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.cf-admin-modelos__list li strong,
+.cf-admin-modelos__list li span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.cf-admin-modelos__list li span,
+.cf-admin-modelos__list li small {
+  color: #66738c;
+  font-size: 11px;
+}
+
+.cf-admin-modelos__list li button {
+  flex: none;
+  border: 1px solid #9aa8bd;
+  padding: 8px 11px;
+  background: transparent;
+  color: #001e5a;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.cf-admin-modelos__preview,
+.cf-admin-modelos__preview-empty {
+  position: relative;
+  height: min(55vh, 540px);
+  min-height: 360px;
+}
+
+.cf-admin-modelos__preview-empty {
+  display: grid;
+  place-items: center;
+  padding: 40px;
+  background: #e9eff7;
+  color: #66738c;
+  font-size: 13px;
+  text-align: center;
+}
+
+.cf-admin-modelos__preview canvas {
+  touch-action: none;
+}
+
+.cf-admin-modelos__preview-status {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  display: grid;
+  place-items: center;
+  margin: 0;
+  background: #e9eff7;
+  color: #66738c;
+  font-size: 12px;
+  pointer-events: none;
+}
+
+.cf-admin-modelos__dialog {
+  width: min(580px, calc(100vw - 32px));
+  max-height: calc(100vh - 32px);
+  border: 0;
+  padding: 0;
+  background: #fff8f2;
+  box-shadow: 0 28px 90px rgb(0 30 90 / 28%);
+  color: #001e5a;
+  overflow-y: auto;
+}
+
+.cf-admin-modelos__dialog::backdrop {
+  background: rgb(0 18 54 / 68%);
+}
+
+.cf-admin-modelos__dialog form {
+  padding: 30px;
+}
+
+.cf-admin-modelos__dialog-heading {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.cf-admin-modelos__dialog-heading h2 {
+  margin: 9px 0 0;
+  font-family: var(--fonte-display), Montserrat, system-ui, sans-serif;
+  font-size: 28px;
+  letter-spacing: -0.045em;
+}
+
+.cf-admin-modelos__dialog-heading > button {
+  border: 0;
+  padding: 0 5px;
+  background: transparent;
+  color: #001e5a;
+  font-size: 30px;
+  line-height: 1;
+}
+
+.cf-admin-modelos__dialog-copy {
+  margin: 20px 0 24px;
+  color: #44516a;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.cf-admin-modelos__dialog label {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 18px;
+  color: #44516a;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.cf-admin-modelos__dialog input {
+  width: 100%;
+  border: 1px solid #9aa8bd;
+  border-radius: 0;
+  padding: 12px;
+  background: #fffdf9;
+  color: #001e5a;
+  font-size: 14px;
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+.cf-admin-modelos__dialog input[type='file'] {
+  padding: 9px;
+  font-size: 12px;
+}
+
+.cf-admin-modelos__file {
+  display: flex;
+  justify-content: space-between;
+  gap: 14px;
+  margin: 12px 0 0;
+  color: #66738c;
+  font-size: 11px;
+}
+
+.cf-admin-modelos__status,
+.cf-admin-modelos__error {
+  margin: 20px 0 0;
+  padding: 12px 14px;
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.cf-admin-modelos__status {
+  background: #e9eff7;
+  color: #001e5a;
+}
+
+.cf-admin-modelos__error {
+  max-width: 1320px;
+  margin-right: auto;
+  margin-left: auto;
+  background: #fee9e6;
+  color: #8c241a;
+}
+
+.cf-admin-modelos__dialog-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 28px;
+  border-top: 1px solid #cbd5e5;
+  padding-top: 22px;
+}
+
+.cf-admin-modelos__dialog-actions > button:not(.cf-admin-modelos__primary) {
+  border: 1px solid #9aa8bd;
+  padding: 13px 17px;
+  background: transparent;
+  color: #001e5a;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.cf-admin-modelos button:focus-visible,
+.cf-admin-modelos input:focus-visible {
+  outline: 2px solid #f36c21;
+  outline-offset: 3px;
+}
+
+@media (max-width: 850px) {
+  .cf-admin-modelos__header {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .cf-admin-modelos__workspace {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .cf-admin-modelos__preview,
+  .cf-admin-modelos__preview-empty {
+    height: 52vh;
+  }
+}
+
+@media (max-width: 520px) {
+  .cf-admin-modelos {
+    padding: 32px 20px 56px;
+  }
+
+  .cf-admin-modelos__notice {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  .cf-admin-modelos__list li {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .cf-admin-modelos__dialog form {
+    padding: 24px 20px;
+  }
+
+  .cf-admin-modelos__dialog-actions {
+    align-items: stretch;
+    flex-direction: column-reverse;
+  }
+}
