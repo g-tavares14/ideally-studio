@@ -18,6 +18,12 @@ export interface Modelo3D {
   criadoEm: string;
 }
 
+/** Forma serializável entregue pela API local. */
+export type Modelo3DComUrls = Modelo3D & {
+  url3mf: string;
+  urlGlb: string;
+};
+
 /** Fronteira substituível entre a aplicação e o armazenamento dos modelos. */
 export interface RepositorioModelos3D {
   salvar(modelo: NovoModelo3D): Promise<Modelo3D>;
