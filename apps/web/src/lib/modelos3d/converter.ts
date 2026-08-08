@@ -1,4 +1,13 @@
-import { Box3, Material, Mesh, Object3D, Texture, Vector3 } from 'three';
+import {
+  Box3,
+  Mesh,
+  MeshPhongMaterial,
+  MeshStandardMaterial,
+  Object3D,
+  Texture,
+  Vector3,
+} from 'three';
+import type { Material } from 'three';
 import { GLTFExporter } from 'three/examples/jsm/exporters/GLTFExporter.js';
 import { ThreeMFLoader } from 'three/examples/jsm/loaders/3MFLoader.js';
 import { LIMITE_3MF_BYTES, LIMITE_GLB_BYTES, LIMITE_TRIANGULOS } from './limites';
@@ -53,6 +62,9 @@ function contarEPrepararTriangulos(modelo: Object3D): number {
     }
 
     if (!geometria.getAttribute('normal')) geometria.computeVertexNormals();
+    objeto.material = Array.isArray(objeto.material)
+      ? objeto.material.map(normalizarMaterial)
+      : normalizarMaterial(objeto.material);
 
     triangulos += quantidadeDeIndicesOuVertices / 3;
     if (triangulos > LIMITE_TRIANGULOS) {
@@ -65,6 +77,25 @@ function contarEPrepararTriangulos(modelo: Object3D): number {
   }
 
   return triangulos;
+}
+
+function normalizarMaterial(material: Material): Material {
+  if (!(material instanceof MeshPhongMaterial)) return material;
+
+  const materialPbr = new MeshStandardMaterial({
+    color: material.color,
+    map: material.map,
+    vertexColors: material.vertexColors,
+    transparent: material.transparent,
+    opacity: material.opacity,
+    alphaTest: material.alphaTest,
+    side: material.side,
+    roughness: 0.8,
+    metalness: 0,
+  });
+  materialPbr.name = material.name;
+  material.dispose();
+  return materialPbr;
 }
 
 function validarDimensoes(modelo: Object3D): void {
