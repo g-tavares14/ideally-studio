@@ -20,6 +20,9 @@ describe('Nav', () => {
       screen.getByRole('link', { name: 'Ideally Studio 3D — início' }).getAttribute('href'),
     ).toBe('/');
     expect(screen.getByRole('link', { name: 'Catálogo' }).getAttribute('href')).toBe('/catalogo');
+    expect(screen.getByRole('link', { name: 'Login' }).getAttribute('href')).toBe(
+      '/admin/produtos',
+    );
     expect(screen.getByRole('button', { name: 'Sacola 2' })).not.toBeNull();
   });
 

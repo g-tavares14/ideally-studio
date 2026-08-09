@@ -33,6 +33,9 @@ export default function Nav({ tema, qtdSacola, abrirSacola }: Props) {
           <Link className="cf-h-underline" href="/sobre" style={link}>
             Ateliê
           </Link>
+          <Link className="cf-site-nav__login cf-h-invert" href="/admin/produtos">
+            Login
+          </Link>
           <button className="cf-h-invert cf-site-nav__bag" onClick={abrirSacola} type="button">
             <span>Sacola</span>
             <span style={{ fontVariantNumeric: 'tabular-nums' }}>{qtdSacola}</span>
