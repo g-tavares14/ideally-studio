@@ -97,6 +97,20 @@ canvas {
   cursor: pointer;
 }
 
+.cf-site-nav__login {
+  display: flex;
+  align-items: center;
+  padding: 7px 14px;
+  border: 1px solid currentColor;
+  border-radius: 100px;
+  color: inherit;
+  background: transparent;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  text-decoration: none;
+}
+
 .cf-route-content {
   position: relative;
   z-index: 20;
@@ -952,6 +966,11 @@ canvas {
   }
 
   .cf-site-nav__bag {
+    padding: 6px 12px;
+    font-size: 12px;
+  }
+
+  .cf-site-nav__login {
     padding: 6px 12px;
     font-size: 12px;
   }
