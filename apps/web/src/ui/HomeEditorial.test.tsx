@@ -24,7 +24,7 @@ afterEach(() => {
 });
 
 describe('HomeEditorial', () => {
-  it('direciona as chamadas principais para o catálogo', () => {
+  it('mantém as chamadas de catálogo e leva o card ao produto específico', () => {
     render(<HomeEditorial produtos={PRODUTOS} thumb={() => ''} />);
 
     expect(screen.getByRole('link', { name: /Ver o catálogo/ }).getAttribute('href')).toBe(
@@ -36,6 +36,9 @@ describe('HomeEditorial', () => {
     expect(screen.getByRole('link', { name: 'Ir para o catálogo' }).getAttribute('href')).toBe(
       '/catalogo',
     );
+    expect(
+      screen.getByRole('link', { name: /Modelo 3D de Vaso de Flores/ }).getAttribute('href'),
+    ).toBe('/produto/vaso');
   });
 
   it('lista os produtos recebidos com nome e preço', () => {
