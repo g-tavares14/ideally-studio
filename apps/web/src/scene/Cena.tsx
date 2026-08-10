@@ -2,10 +2,10 @@ import { useEffect, useMemo, useRef } from 'react';
 import type { RefObject } from 'react';
 import * as THREE from 'three';
 import { Canvas, useFrame, useThree } from '@react-three/fiber';
-import { Html } from '@react-three/drei';
+import { Billboard, Text } from '@react-three/drei';
 import { CORES, MATERIAIS, TAMANHOS } from '@cria-forma/shared';
 import type { Produto } from '@cria-forma/shared';
-import { enquadrarCaixa } from './caixa';
+import { enquadrarCaixa, type Encaixe } from './caixa';
 import { dimensoesDoProduto, formatarNumeroCm, type DimensoesCm } from './dimensoes';
 import { modeloDe } from './modelos';
 import Palco, { PLATAFORMA_ALTURA } from './Palco';
@@ -18,6 +18,9 @@ const FATOR_MAX = Math.max(...TAMANHOS.map((t) => t.fator));
 const CAM_EDITOR = new THREE.Vector3(0, 2.45, 6.4);
 const FOV = 38;
 const MAT_PADRAO = MATERIAIS[0];
+const PONTA_MEDIDA_RAIO = 0.032;
+const PONTA_MEDIDA_ALTURA = 0.08;
+const PONTA_MEDIDA_MEIA_ALTURA = PONTA_MEDIDA_ALTURA / 2;
 
 const limitar = (v: number, min: number, max: number) => Math.max(min, Math.min(max, v));
 
@@ -199,26 +202,145 @@ function Modelo({ produto, cor, rough, metal, fator, controle }: ModeloProps) {
   return (
     <group ref={corpo} position={[0, PLATAFORMA_ALTURA, 0]}>
       <Peca id={produto.id} cor={cor} rough={rough} metal={metal} opacity={1} />
-      <MedidasModelo dimensoes={dimensoes} />
+      <MedidasModelo
+        encaixe={encaixe}
+        dimensoes={dimensoes}
+        cor={cor}
+        rough={rough}
+        metal={metal}
+      />
     </group>
   );
 }
 
-function MedidasModelo({ dimensoes }: { dimensoes: DimensoesCm }) {
-  const texto = `${formatarNumeroCm(dimensoes.largura)} × ${formatarNumeroCm(
-    dimensoes.altura,
-  )} × ${formatarNumeroCm(dimensoes.profundidade)} cm`;
+function MedidasModelo({
+  encaixe,
+  dimensoes,
+  cor,
+  rough,
+  metal,
+}: {
+  encaixe: Encaixe;
+  dimensoes: DimensoesCm;
+  cor: string;
+  rough: number;
+  metal: number;
+}) {
+  const gap = 0.11;
+  const frente = 0.04;
+  const recuoPonta = PONTA_MEDIDA_MEIA_ALTURA;
+  const xAltura = -(encaixe.largura / 2 + gap);
+  const yComprimento = encaixe.altura + gap;
+  const alturaBase: [number, number, number] = [xAltura, recuoPonta, frente];
+  const alturaTopo: [number, number, number] = [xAltura, encaixe.altura - recuoPonta, frente];
+  const comprimentoInicio: [number, number, number] = [
+    -encaixe.largura / 2 + recuoPonta,
+    yComprimento,
+    frente,
+  ];
+  const comprimentoFim: [number, number, number] = [
+    encaixe.largura / 2 - recuoPonta,
+    yComprimento,
+    frente,
+  ];
+  const textoAltura = `${formatarNumeroCm(dimensoes.altura)} cm`;
+  const textoComprimento = `${formatarNumeroCm(dimensoes.largura)} cm`;
 
   return (
-    <Html position={[0, 0.84, 0]} center distanceFactor={6} style={{ pointerEvents: 'none' }}>
-      <div
-        className="cf-model-dimensions"
-        aria-label={`Dimensões: ${texto}. Largura, altura e profundidade.`}
-      >
-        <span className="cf-model-dimensions__label">Medidas</span>
-        <strong>{texto}</strong>
-        <span className="cf-model-dimensions__legend">L × A × P</span>
-      </div>
-    </Html>
+    <>
+      <VetorMedida
+        inicio={alturaBase}
+        fim={alturaTopo}
+        texto={textoAltura}
+        inicioRotacao={[0, 0, 0]}
+        fimRotacao={[0, 0, Math.PI]}
+        textoPosicao={[xAltura, encaixe.altura / 2, frente]}
+        cor={cor}
+        rough={rough}
+        metal={metal}
+      />
+      <VetorMedida
+        inicio={comprimentoInicio}
+        fim={comprimentoFim}
+        texto={textoComprimento}
+        inicioRotacao={[0, 0, Math.PI / 2]}
+        fimRotacao={[0, 0, -Math.PI / 2]}
+        textoPosicao={[0, yComprimento, frente]}
+        cor={cor}
+        rough={rough}
+        metal={metal}
+      />
+    </>
+  );
+}
+
+type Ponto3D = [number, number, number];
+
+function VetorMedida({
+  inicio,
+  fim,
+  texto,
+  inicioRotacao,
+  fimRotacao,
+  textoPosicao,
+  cor,
+  rough,
+  metal,
+}: {
+  inicio: Ponto3D;
+  fim: Ponto3D;
+  texto: string;
+  inicioRotacao: Ponto3D;
+  fimRotacao: Ponto3D;
+  textoPosicao: Ponto3D;
+  cor: string;
+  rough: number;
+  metal: number;
+}) {
+  return (
+    <>
+      <PontaVetor
+        position={inicio}
+        rotation={inicioRotacao}
+        cor={cor}
+        rough={rough}
+        metal={metal}
+      />
+      <PontaVetor position={fim} rotation={fimRotacao} cor={cor} rough={rough} metal={metal} />
+      <Billboard position={textoPosicao} follow>
+        <Text
+          anchorX="center"
+          anchorY="middle"
+          color="#001E5A"
+          depthOffset={-1}
+          fontSize={0.075}
+          outlineColor="#FFF8F2"
+          outlineWidth={0.012}
+        >
+          {texto}
+        </Text>
+      </Billboard>
+    </>
+  );
+}
+
+function PontaVetor({
+  position,
+  rotation,
+  cor,
+  rough,
+  metal,
+}: {
+  position: Ponto3D;
+  rotation: Ponto3D;
+  cor: string;
+  rough: number;
+  metal: number;
+}) {
+  return (
+    <mesh position={position} rotation={rotation} castShadow>
+      <coneGeometry args={[PONTA_MEDIDA_RAIO, PONTA_MEDIDA_ALTURA, 8]} />
+      <meshStandardMaterial color={cor} roughness={rough} metalness={metal} />
+    </mesh>
   );
 }
