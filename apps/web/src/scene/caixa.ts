@@ -21,8 +21,10 @@ export interface Encaixe {
   escala: number;
   /** deslocamento que centra em X/Z e apoia a base em y = 0 */
   offset: [number, number, number];
-  /** altura ocupada dentro da caixa — âncora da etiqueta */
+  /** dimensões ocupadas dentro da caixa padrão */
+  largura: number;
   altura: number;
+  profundidade: number;
 }
 
 /**
@@ -55,7 +57,9 @@ export function encaixar(partes: ParteGeo[], caixa: Caixa = CAIXA_PADRAO): Encai
   return {
     escala,
     offset: [-centro.x * escala, -bb.min.y * escala, -centro.z * escala],
+    largura: tam.x * escala,
     altura: tam.y * escala,
+    profundidade: tam.z * escala,
   };
 }
 

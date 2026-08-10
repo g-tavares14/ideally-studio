@@ -1,10 +1,13 @@
 import { useEffect, useMemo, useRef } from 'react';
-import type { MutableRefObject } from 'react';
+import type { RefObject } from 'react';
 import * as THREE from 'three';
 import { Canvas, useFrame, useThree } from '@react-three/fiber';
+import { Html } from '@react-three/drei';
 import { CORES, MATERIAIS, TAMANHOS } from '@cria-forma/shared';
 import type { Produto } from '@cria-forma/shared';
 import { enquadrarCaixa } from './caixa';
+import { dimensoesDoProduto, formatarNumeroCm, type DimensoesCm } from './dimensoes';
+import { modeloDe } from './modelos';
 import Palco, { PLATAFORMA_ALTURA } from './Palco';
 import Peca from './Peca';
 import type { Ambiente } from '../types';
@@ -171,12 +174,17 @@ interface ModeloProps {
   rough: number;
   metal: number;
   fator: number;
-  controle: MutableRefObject<Controle>;
+  controle: RefObject<Controle>;
 }
 
 function Modelo({ produto, cor, rough, metal, fator, controle }: ModeloProps) {
   const corpo = useRef<THREE.Group>(null);
   const escalaAlvo = useRef(new THREE.Vector3(1, 1, 1));
+  const encaixe = useMemo(() => modeloDe(produto.id).encaixe, [produto.id]);
+  const dimensoes = useMemo(
+    () => dimensoesDoProduto(produto, encaixe, fator),
+    [produto, encaixe, fator],
+  );
 
   useFrame((state) => {
     const grupo = corpo.current;
@@ -191,6 +199,26 @@ function Modelo({ produto, cor, rough, metal, fator, controle }: ModeloProps) {
   return (
     <group ref={corpo} position={[0, PLATAFORMA_ALTURA, 0]}>
       <Peca id={produto.id} cor={cor} rough={rough} metal={metal} opacity={1} />
+      <MedidasModelo dimensoes={dimensoes} />
     </group>
+  );
+}
+
+function MedidasModelo({ dimensoes }: { dimensoes: DimensoesCm }) {
+  const texto = `${formatarNumeroCm(dimensoes.largura)} × ${formatarNumeroCm(
+    dimensoes.altura,
+  )} × ${formatarNumeroCm(dimensoes.profundidade)} cm`;
+
+  return (
+    <Html position={[0, 0.84, 0]} center distanceFactor={6} style={{ pointerEvents: 'none' }}>
+      <div
+        className="cf-model-dimensions"
+        aria-label={`Dimensões: ${texto}. Largura, altura e profundidade.`}
+      >
+        <span className="cf-model-dimensions__label">Medidas</span>
+        <strong>{texto}</strong>
+        <span className="cf-model-dimensions__legend">L × A × P</span>
+      </div>
+    </Html>
   );
 }

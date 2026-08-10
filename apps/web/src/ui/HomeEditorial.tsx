@@ -38,7 +38,8 @@ const DEPOIMENTOS = [
     local: 'São Paulo',
   },
   {
-    texto: 'Encomendei um vaso na cor certa pro meu espaço e o acabamento feito à mão faz toda diferença.',
+    texto:
+      'Encomendei um vaso na cor certa pro meu espaço e o acabamento feito à mão faz toda diferença.',
     nome: 'Rafael Lima',
     local: 'Curitiba',
   },
@@ -108,7 +109,7 @@ export default function HomeEditorial({ produtos, thumb }: Props) {
           </div>
           <div className="cf-home-editorial__grid">
             {destaques.map((p) => (
-              <Link key={p.id} className="cf-home-editorial__card reveal" href="/catalogo">
+              <Link key={p.id} className="cf-home-editorial__card reveal" href={`/produto/${p.id}`}>
                 <div className="cf-home-editorial__card-image">
                   <img src={thumb(p.id) || undefined} alt={`Modelo 3D de ${p.nome}`} />
                   <span className="cf-home-editorial__card-tag">{p.prazo}</span>
