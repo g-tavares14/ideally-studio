@@ -141,37 +141,6 @@ canvas {
   background: #fff8f2;
 }
 
-.cf-model-dimensions {
-  display: flex;
-  min-width: 152px;
-  flex-direction: column;
-  gap: 4px;
-  padding: 10px 13px;
-  border: 1px solid rgba(0, 30, 90, 0.18);
-  border-radius: 3px;
-  background: rgba(255, 248, 242, 0.92);
-  box-shadow: 0 8px 24px rgba(0, 30, 90, 0.12);
-  color: #001e5a;
-  text-align: center;
-  white-space: nowrap;
-  user-select: none;
-}
-
-.cf-model-dimensions__label,
-.cf-model-dimensions__legend {
-  color: #66738c;
-  font-size: 9px;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-}
-
-.cf-model-dimensions strong {
-  font-size: 12px;
-  font-weight: 600;
-  letter-spacing: 0.03em;
-  font-variant-numeric: tabular-nums;
-}
-
 .cf-route-transition {
   position: absolute;
   inset: 0;
