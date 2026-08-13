@@ -68,7 +68,7 @@ function Editor({ ambiente, produto, mat, cor, tam, movimentoReduzido }: CenaPro
   const controle = useRef<Controle>({ spin: 0, arrasto: 0 });
   const material = useMemo(() => MATERIAIS.find((item) => item.id === mat) ?? MAT_PADRAO, [mat]);
   const acabamento = CORES[cor] ?? CORES[0];
-  const fator = TAMANHOS.find((item) => item.id === tam)?.fator ?? 1;
+  const fator = Math.min(TAMANHOS.find((item) => item.id === tam)?.fator ?? 1, FATOR_MAX);
 
   useEffect(() => {
     controle.current.spin = 0;
@@ -231,6 +231,7 @@ function MedidasModelo({
   const recuoPonta = PONTA_MEDIDA_MEIA_ALTURA;
   const xAltura = -(encaixe.largura / 2 + gap);
   const yComprimento = encaixe.altura + gap;
+  const xProfundidade = encaixe.largura / 2 + gap;
   const alturaBase: [number, number, number] = [xAltura, recuoPonta, frente];
   const alturaTopo: [number, number, number] = [xAltura, encaixe.altura - recuoPonta, frente];
   const comprimentoInicio: [number, number, number] = [
@@ -243,8 +244,19 @@ function MedidasModelo({
     yComprimento,
     frente,
   ];
+  const profundidadeInicio: [number, number, number] = [
+    xProfundidade,
+    encaixe.altura / 2,
+    -encaixe.profundidade / 2 + recuoPonta,
+  ];
+  const profundidadeFim: [number, number, number] = [
+    xProfundidade,
+    encaixe.altura / 2,
+    encaixe.profundidade / 2 - recuoPonta,
+  ];
   const textoAltura = `${formatarNumeroCm(dimensoes.altura)} cm`;
   const textoComprimento = `${formatarNumeroCm(dimensoes.largura)} cm`;
+  const textoProfundidade = `${formatarNumeroCm(dimensoes.profundidade)} cm`;
 
   return (
     <>
@@ -266,6 +278,17 @@ function MedidasModelo({
         inicioRotacao={[0, 0, Math.PI / 2]}
         fimRotacao={[0, 0, -Math.PI / 2]}
         textoPosicao={[0, yComprimento, frente]}
+        cor={cor}
+        rough={rough}
+        metal={metal}
+      />
+      <VetorMedida
+        inicio={profundidadeInicio}
+        fim={profundidadeFim}
+        texto={textoProfundidade}
+        inicioRotacao={[Math.PI / 2, 0, 0]}
+        fimRotacao={[-Math.PI / 2, 0, 0]}
+        textoPosicao={[xProfundidade, encaixe.altura / 2, 0]}
         cor={cor}
         rough={rough}
         metal={metal}

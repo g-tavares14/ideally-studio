@@ -68,6 +68,11 @@ const RAD = Math.PI / 180;
 const MARGEM = 1.14;
 /** inclinação da câmera de produto, em radianos (~10°) */
 const ELEVACAO = 0.175;
+/**
+ * Folga das cotas (setas + texto) além da caixa da peça, no espaço do modelo.
+ * Sem isso o tamanho G sobe no quadro e invade o header.
+ */
+export const FOLGA_COTAS = 0.22;
 
 export interface Enquadramento {
   /** distância da câmera ao ponto de mira */
@@ -133,8 +138,9 @@ function cabe(
 
 /**
  * Enquadramento da tela de produto, derivado da caixa — nenhum número mágico
- * por peça. A distância é resolvida para o maior tamanho (G) e não muda com o
- * tamanho escolhido: é assim que trocar P/M/G se *vê* como a peça crescendo.
+ * por peça. A distância é resolvida para o maior tamanho visual (G, com cotas)
+ * e não muda com o tamanho escolhido: é assim que trocar P/M/G se *vê* como a
+ * peça crescendo, sem invadir o header.
  */
 export function enquadrarCaixa(opts: {
   fov: number;
@@ -149,13 +155,21 @@ export function enquadrarCaixa(opts: {
   const { fov, aspect, larguraPx, painelPx, fatorMax } = opts;
   const caixa = opts.caixa ?? CAIXA_PADRAO;
   const tanV = Math.tan((fov / 2) * RAD);
+  const fatorVisualMax = Math.max(fatorMax, 1);
 
   // mira no meio do caminho entre o centro da caixa em M e o centro em G: nada
   // é cortado no tamanho maior e a peça não fica no rodapé do quadro no menor
-  const alvoY = (caixa.altura * (fatorMax + 1)) / 4;
+  const alvoY = (caixa.altura * (fatorVisualMax + 1)) / 4;
   // em telas estreitas o painel comeria o quadro inteiro; guarda um mínimo útil
   const pf = Math.min(0.55, painelPx / Math.max(larguraPx, 1));
-  const pts = cantos(caixa, fatorMax);
+  const pts = cantos(
+    {
+      largura: caixa.largura + FOLGA_COTAS * 2,
+      altura: caixa.altura + FOLGA_COTAS,
+      profundidade: caixa.profundidade + FOLGA_COTAS * 2,
+    },
+    fatorVisualMax,
+  );
 
   // bissecção: afastar sempre ajuda, então o menor `dist` que cabe é o certo
   let baixo = 0.5;
