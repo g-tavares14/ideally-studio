@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import * as THREE from 'three';
 import { PRODUTOS } from '@cria-forma/shared';
-import { CAIXA_PADRAO, encaixar } from './caixa';
+import { CAIXA_PADRAO, FOLGA_COTAS, encaixar, enquadrarCaixa } from './caixa';
 import { partesDe } from './pecas';
 
 /**
@@ -70,5 +70,36 @@ describe('encaixar', () => {
     // CLAUDE.md: a caixa é menor que o topo (0.72) de propósito
     expect(CAIXA_PADRAO.largura).toBeLessThan(0.72);
     expect(CAIXA_PADRAO.profundidade).toBeLessThan(0.72);
+  });
+});
+
+describe('enquadrarCaixa', () => {
+  const base = {
+    fov: 38,
+    aspect: 16 / 9,
+    larguraPx: 1440,
+    painelPx: 440,
+  };
+
+  it('afasta a câmera quando o tamanho máximo cresce', () => {
+    const emM = enquadrarCaixa({ ...base, fatorMax: 1 });
+    const emG = enquadrarCaixa({ ...base, fatorMax: 1.45 });
+
+    expect(emG.dist).toBeGreaterThan(emM.dist);
+  });
+
+  it('reserva folga maior que as cotas desenhadas na peça', () => {
+    const gapCota = 0.11;
+    const meiaAlturaTexto = 0.075 / 2 + 0.012;
+
+    expect(FOLGA_COTAS).toBeGreaterThan(gapCota + meiaAlturaTexto);
+  });
+
+  it('não deixa um fator abaixo de 1 encolher o enquadramento máximo', () => {
+    const emM = enquadrarCaixa({ ...base, fatorMax: 1 });
+    const abaixoDeM = enquadrarCaixa({ ...base, fatorMax: 0.78 });
+
+    expect(abaixoDeM.dist).toBeCloseTo(emM.dist, 5);
+    expect(abaixoDeM.alvoY).toBeCloseTo(emM.alvoY, 5);
   });
 });

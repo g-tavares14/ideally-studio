@@ -137,6 +137,8 @@ canvas {
 .cf-product-canvas {
   position: absolute;
   inset: 0;
+  overflow: hidden;
+  isolation: isolate;
   touch-action: none;
   background: #fff8f2;
 }
