@@ -10,7 +10,7 @@ const PRODUTOS: Produto[] = [
     nome: 'Vaso de Flores',
     cat: 'Decoração',
     preco: 320,
-    altura: '24 cm',
+    alturaCm: 24,
     prazo: '5 dias',
     desc: '',
   },

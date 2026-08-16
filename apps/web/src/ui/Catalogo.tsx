@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { BRL, FILTROS } from '@cria-forma/shared';
+import { BRL, FILTROS, formatarMedidaCm } from '@cria-forma/shared';
 import type { Produto } from '@cria-forma/shared';
 import { cor as paleta, fonte } from '../styles/tokens';
 
@@ -256,7 +256,7 @@ export default function Catalogo({ produtos, filtro, escolherFiltro, thumb, abri
               </div>
             </div>
             <div style={{ marginTop: 4, color: paleta.suave, fontSize: 12 }}>
-              {item.cat} · {item.altura}
+              {item.cat} · {formatarMedidaCm(item.alturaCm)}
             </div>
           </button>
         ))}

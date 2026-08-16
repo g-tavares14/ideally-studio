@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { BRL } from '@cria-forma/shared';
+import { BRL, formatarMedidaCm } from '@cria-forma/shared';
 import type { Produto } from '@cria-forma/shared';
 
 interface Props {
@@ -120,7 +120,7 @@ export default function HomeEditorial({ produtos, thumb }: Props) {
                 </div>
                 <div className="cf-home-editorial__card-meta">
                   <span>{p.cat}</span>
-                  <span>{p.altura}</span>
+                  <span>{formatarMedidaCm(p.alturaCm)}</span>
                 </div>
               </Link>
             ))}

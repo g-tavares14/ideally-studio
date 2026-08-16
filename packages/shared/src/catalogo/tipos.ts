@@ -3,7 +3,8 @@ export interface Produto {
   nome: string;
   cat: string;
   preco: number;
-  altura: string;
+  /** altura física do tamanho M, em centímetros */
+  alturaCm: number;
   prazo: string;
   desc: string;
 }

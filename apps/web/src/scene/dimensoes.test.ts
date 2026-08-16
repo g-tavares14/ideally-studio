@@ -1,22 +1,21 @@
 import { describe, expect, it } from 'vitest';
-import { PRODUTOS, TAMANHOS } from '@cria-forma/shared';
+import { TAMANHOS } from '@cria-forma/shared';
 import { dimensoesDoProduto } from './dimensoes';
-import { modeloDe } from './modelos';
+
+const ENCAIXE = { largura: 0.4, altura: 0.5, profundidade: 0.3 };
 
 describe('dimensoesDoProduto', () => {
-  it.each(PRODUTOS)('calcula medidas físicas para %s', (produto) => {
-    const dimensoes = dimensoesDoProduto(produto, modeloDe(produto.id).encaixe, 1);
+  it('usa a altura cadastrada do tamanho M e deriva o resto da geometria', () => {
+    const dimensoes = dimensoesDoProduto(24, ENCAIXE, 1);
 
-    expect(dimensoes.largura).toBeGreaterThan(0);
-    expect(dimensoes.altura).toBe(Number.parseFloat(produto.altura));
-    expect(dimensoes.profundidade).toBeGreaterThan(0);
+    expect(dimensoes.altura).toBe(24);
+    expect(dimensoes.largura).toBeCloseTo(19.2, 5);
+    expect(dimensoes.profundidade).toBeCloseTo(14.4, 5);
   });
 
   it('escala largura, altura e profundidade junto com o tamanho escolhido', () => {
-    const produto = PRODUTOS[0];
-    const encaixe = modeloDe(produto.id).encaixe;
-    const padrao = dimensoesDoProduto(produto, encaixe, TAMANHOS[1].fator);
-    const grande = dimensoesDoProduto(produto, encaixe, TAMANHOS[2].fator);
+    const padrao = dimensoesDoProduto(24, ENCAIXE, TAMANHOS[1].fator);
+    const grande = dimensoesDoProduto(24, ENCAIXE, TAMANHOS[2].fator);
 
     expect(grande.largura / padrao.largura).toBeCloseTo(TAMANHOS[2].fator, 5);
     expect(grande.altura / padrao.altura).toBeCloseTo(TAMANHOS[2].fator, 5);
