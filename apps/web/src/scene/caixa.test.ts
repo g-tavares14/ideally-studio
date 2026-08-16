@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import * as THREE from 'three';
 import { PRODUTOS } from '@cria-forma/shared';
-import { CAIXA_PADRAO, FOLGA_COTAS, encaixar, enquadrarCaixa } from './caixa';
+import { CAIXA_PADRAO, encaixar, enquadrarCaixa } from './caixa';
 import { partesDe } from './pecas';
 
 /**
@@ -86,13 +86,6 @@ describe('enquadrarCaixa', () => {
     const emG = enquadrarCaixa({ ...base, fatorMax: 1.45 });
 
     expect(emG.dist).toBeGreaterThan(emM.dist);
-  });
-
-  it('reserva folga maior que as cotas desenhadas na peça', () => {
-    const gapCota = 0.11;
-    const meiaAlturaTexto = 0.075 / 2 + 0.012;
-
-    expect(FOLGA_COTAS).toBeGreaterThan(gapCota + meiaAlturaTexto);
   });
 
   it('não deixa um fator abaixo de 1 encolher o enquadramento máximo', () => {

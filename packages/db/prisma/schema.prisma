@@ -39,6 +39,8 @@ model Produto {
   /// bug garantido. A UI hoje trabalha em reais inteiros, então a conversão
   /// acontece na borda, quando o app for ligado no banco.
   precoCent Int
+  /// rótulo de vitrine (`"24 cm"`). A medida canônica é `Produto.alturaCm`
+  /// no catálogo compartilhado; o seed formata na borda. O app ainda não lê o banco.
   altura    String
   prazo     String
   desc      String

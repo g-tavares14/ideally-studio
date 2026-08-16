@@ -1,4 +1,4 @@
-import { CORES, MATERIAIS, PRODUTOS, TAMANHOS } from '@cria-forma/shared';
+import { CORES, MATERIAIS, PRODUTOS, TAMANHOS, formatarMedidaCm } from '@cria-forma/shared';
 import { db } from '../src/index';
 import { Categoria } from '../generated/client';
 
@@ -31,7 +31,7 @@ async function main() {
       nome: p.nome,
       categoria: categoriaDe(p.cat),
       precoCent: emCentavos(p.preco),
-      altura: p.altura,
+      altura: formatarMedidaCm(p.alturaCm),
       prazo: p.prazo,
       desc: p.desc,
       ordem: i,
